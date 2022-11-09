@@ -1,4 +1,4 @@
-package com.pje.basic.interfaces;
+package com.pje.sansomatchingwalkingmateapi.interfaces;
 
 public interface CommonModelBuilder<T> {
     T build();

@@ -1,4 +1,4 @@
-package com.pje.basic.exception;
+package com.pje.sansomatchingwalkingmateapi.exception;
 
 public class CNoMemberDataException extends RuntimeException {
     public CNoMemberDataException(String msg, Throwable t) {

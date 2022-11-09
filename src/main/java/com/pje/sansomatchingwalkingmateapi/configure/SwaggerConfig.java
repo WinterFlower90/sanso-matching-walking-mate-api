@@ -1,4 +1,4 @@
-package com.pje.basic.configure;
+package com.pje.sansomatchingwalkingmateapi.configure;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

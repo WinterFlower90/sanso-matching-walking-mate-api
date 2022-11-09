@@ -1,4 +1,4 @@
-package com.pje.basic.advice;
+package com.pje.sansomatchingwalkingmateapi.advice;
 
 import com.pje.basic.enums.ResultCode;
 import com.pje.basic.exception.CMissingDataException;

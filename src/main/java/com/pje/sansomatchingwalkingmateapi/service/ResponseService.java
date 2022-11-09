@@ -1,4 +1,4 @@
-package com.pje.basic.service;
+package com.pje.sansomatchingwalkingmateapi.service;
 
 import com.pje.basic.enums.ResultCode;
 import com.pje.basic.model.CommonResult;
