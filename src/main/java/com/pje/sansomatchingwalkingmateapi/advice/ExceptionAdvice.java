@@ -1,10 +1,10 @@
 package com.pje.sansomatchingwalkingmateapi.advice;
 
-import com.pje.basic.enums.ResultCode;
-import com.pje.basic.exception.CMissingDataException;
-import com.pje.basic.exception.CNoMemberDataException;
-import com.pje.basic.model.CommonResult;
-import com.pje.basic.service.ResponseService;
+import com.pje.sansomatchingwalkingmateapi.enums.ResultCode;
+import com.pje.sansomatchingwalkingmateapi.exception.CMissingDataException;
+import com.pje.sansomatchingwalkingmateapi.exception.CNoMemberDataException;
+import com.pje.sansomatchingwalkingmateapi.model.CommonResult;
+import com.pje.sansomatchingwalkingmateapi.service.ResponseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

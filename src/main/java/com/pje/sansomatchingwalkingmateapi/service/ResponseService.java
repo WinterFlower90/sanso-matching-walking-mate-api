@@ -1,9 +1,9 @@
 package com.pje.sansomatchingwalkingmateapi.service;
 
-import com.pje.basic.enums.ResultCode;
-import com.pje.basic.model.CommonResult;
-import com.pje.basic.model.ListResult;
-import com.pje.basic.model.SingleResult;
+import com.pje.sansomatchingwalkingmateapi.enums.ResultCode;
+import com.pje.sansomatchingwalkingmateapi.model.CommonResult;
+import com.pje.sansomatchingwalkingmateapi.model.ListResult;
+import com.pje.sansomatchingwalkingmateapi.model.SingleResult;
 import org.springframework.stereotype.Service;
 
 @Service
