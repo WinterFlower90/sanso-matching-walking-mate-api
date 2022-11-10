@@ -9,6 +9,8 @@ public enum ResultCode {
     SUCCESS(0,"성공하였습니다.")
     ,FAILED(-1, "실패하였습니다.")
 
+    ,ACCESS_DENIED(-1000, "권한이 없습니다.")
+
     ,MISSING_DATA(-10000,"데이터를 찾을 수 없습니다.")
     ,WRONG_PHONE_NUMBER(-10001, "잘못된 핸드폰 번호입니다.")
 

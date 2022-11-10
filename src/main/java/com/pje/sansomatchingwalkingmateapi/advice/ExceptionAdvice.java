@@ -1,6 +1,7 @@
 package com.pje.sansomatchingwalkingmateapi.advice;
 
 import com.pje.sansomatchingwalkingmateapi.enums.ResultCode;
+import com.pje.sansomatchingwalkingmateapi.exception.CAccessDeniedException;
 import com.pje.sansomatchingwalkingmateapi.exception.CMissingDataException;
 import com.pje.sansomatchingwalkingmateapi.exception.CNoMemberDataException;
 import com.pje.sansomatchingwalkingmateapi.model.CommonResult;
@@ -30,6 +31,12 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected CommonResult customException(HttpServletRequest request, CNoMemberDataException e) {
         return ResponseService.getFailResult(ResultCode.NO_MEMBER_DATA);
+    }
+
+    @ExceptionHandler(CAccessDeniedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED) //403 에러로
+    protected CommonResult customException(HttpServletRequest request, CAccessDeniedException e) {
+        return ResponseService.getFailResult(ResultCode.ACCESS_DENIED);
     }
 }
 
