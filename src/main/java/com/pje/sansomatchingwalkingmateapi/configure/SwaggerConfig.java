@@ -19,7 +19,7 @@ import java.util.Collections;
 public class SwaggerConfig {
     private String version;
     private String title;
-    private final String TITLE_FIX = "차량 관리 API ";
+    private final String TITLE_FIX = "산책메이트 관리 API ";
 
     @Bean
     public Docket apiV1() {
@@ -30,7 +30,7 @@ public class SwaggerConfig {
                 .useDefaultResponseMessages(false)
                 .groupName(version)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.pje.study0816"))
+                .apis(RequestHandlerSelectors.basePackage("com.pje.sansomatchingwalkingmateapi"))
                 .paths(PathSelectors.ant("/V1/**"))
                 .build()
                 .apiInfo(getApiInfo(title, version))
@@ -47,7 +47,7 @@ public class SwaggerConfig {
                 .useDefaultResponseMessages(false)
                 .groupName(version)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.pje.study0816"))
+                .apis(RequestHandlerSelectors.basePackage("com.pje.sansomatchingwalkingmateapi"))
                 .paths(PathSelectors.ant("/V2/**"))
                 .build()
                 .apiInfo(getApiInfo(title, version))

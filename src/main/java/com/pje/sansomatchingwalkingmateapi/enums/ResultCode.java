@@ -11,6 +11,7 @@ public enum ResultCode {
 
     ,ACCESS_DENIED(-1000, "권한이 없습니다.")
     ,USERNAME_SIGN_IN_FAILED(-1001, "가입된 사용자가 아닙니다.")
+    ,AUTHENTICATION_ENTRY_POINT(-1002, "접근 권한이 없습니다.")
 
     ,MISSING_DATA(-10000,"데이터를 찾을 수 없습니다.")
     ,WRONG_PHONE_NUMBER(-10001, "잘못된 핸드폰 번호입니다.")

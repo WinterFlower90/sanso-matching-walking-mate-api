@@ -17,10 +17,17 @@ public class CustomUserDetailService implements UserDetailsService {
     private final AccountStatusUserDetailsChecker detailsChecker = new AccountStatusUserDetailsChecker();
 
 
+    /** 로그인 아이디로 사용자 체크하기
+     *
+     * @param username the username identifying the user whose data is required.
+     *                 parameter 값의 username 과 repository 의 username 을 대조.
+     * @return member - UserDetails = Member
+     * @throws UsernameNotFoundException - "가입된 사용자가 아닙니다." 출력
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Member member = memberRepository.findByUsername(username).orElseThrow(CUserNameSignException::new);
         detailsChecker.check(member);
-        return member; //UserDetails = Member
+        return member;
     }
 }
