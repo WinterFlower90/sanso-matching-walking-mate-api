@@ -1,6 +1,6 @@
 package com.pje.sansomatchingwalkingmateapi.service;
 
-import com.pje.sansomatchingwalkingmateapi.model.ListResult;
+import com.pje.sansomatchingwalkingmateapi.model.common.ListResult;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 

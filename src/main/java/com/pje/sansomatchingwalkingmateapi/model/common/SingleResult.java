@@ -1,4 +1,4 @@
-package com.pje.sansomatchingwalkingmateapi.model;
+package com.pje.sansomatchingwalkingmateapi.model.common;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,4 +8,3 @@ import lombok.Setter;
 public class SingleResult<T> extends CommonResult {
     private T data;
 }
-

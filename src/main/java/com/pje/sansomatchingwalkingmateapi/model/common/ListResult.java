@@ -1,4 +1,4 @@
-package com.pje.sansomatchingwalkingmateapi.model;
+package com.pje.sansomatchingwalkingmateapi.model.common;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ListResult<T> extends CommonResult{
+public class ListResult<T> extends CommonResult {
     private List<T> list;
 
     private Long totalItemCount;
@@ -16,4 +16,3 @@ public class ListResult<T> extends CommonResult{
 
     private Integer currentPage;
 }
-

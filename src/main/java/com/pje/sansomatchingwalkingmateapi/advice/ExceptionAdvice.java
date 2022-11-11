@@ -2,7 +2,7 @@ package com.pje.sansomatchingwalkingmateapi.advice;
 
 import com.pje.sansomatchingwalkingmateapi.enums.ResultCode;
 import com.pje.sansomatchingwalkingmateapi.exception.*;
-import com.pje.sansomatchingwalkingmateapi.model.CommonResult;
+import com.pje.sansomatchingwalkingmateapi.model.common.CommonResult;
 import com.pje.sansomatchingwalkingmateapi.service.ResponseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -49,6 +49,11 @@ public class ExceptionAdvice {
         return ResponseService.getFailResult(ResultCode.USERNAME_SIGN_IN_FAILED);
     }
 
+    @ExceptionHandler(CWrongPhoneNumberException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected CommonResult customException(HttpServletRequest request, CWrongPhoneNumberException e) {
+        return ResponseService.getFailResult(ResultCode.WRONG_PHONE_NUMBER);
+    }
 
 }
 

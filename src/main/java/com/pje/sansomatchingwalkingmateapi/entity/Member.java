@@ -1,6 +1,8 @@
 package com.pje.sansomatchingwalkingmateapi.entity;
 
 import com.pje.sansomatchingwalkingmateapi.enums.MemberGroup;
+import com.pje.sansomatchingwalkingmateapi.interfaces.CommonModelBuilder;
+import com.pje.sansomatchingwalkingmateapi.model.member.MemberCreateRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,9 +41,6 @@ public class Member implements UserDetails {
     private LocalDateTime dateCreate;
 
     @Column(nullable = false)
-    private LocalDateTime dateUpdate;
-
-    @Column(nullable = false)
     private Boolean isEnabled;
 
     @Override
@@ -69,5 +68,39 @@ public class Member implements UserDetails {
     @Override
     public boolean isEnabled() {
         return this.isEnabled;
+    }
+
+    private Member(MemberBuilder builder) {
+        this.memberGroup = builder.memberGroup;
+        this.username = builder.username;
+        this.password = builder.password;
+        this.name = builder.name;
+        this.dateCreate = builder.dateCreate;
+        this.isEnabled = builder.isEnabled;
+    }
+
+    public static class MemberBuilder implements CommonModelBuilder<Member> {
+        private final MemberGroup memberGroup;
+        private final String username;
+        private final String password;
+        private final String name;
+        private final LocalDateTime dateCreate;
+        private final Boolean isEnabled;
+
+        // 빌더에서 회원그룹 따로 받는 이유 : 일반유저가 회원가입시 내가 일반유저다 라고 선택하지 않음.
+        // 회원등록은 관리자페이지에서 관리자가 하거나 일반유저가 회원가입하거나.. N개의 경우의 수가 존재함.
+        public MemberBuilder(MemberGroup memberGroup, MemberCreateRequest createRequest) {
+            this.memberGroup = memberGroup;
+            this.username = createRequest.getUsername();
+            this.password = createRequest.getPassword();
+            this.name = createRequest.getName();
+            this.dateCreate = LocalDateTime.now();
+            this.isEnabled = true;
+        }
+
+        @Override
+        public Member build() {
+            return new Member(this);
+        }
     }
 }

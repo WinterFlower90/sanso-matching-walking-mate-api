@@ -1,4 +1,4 @@
-package com.pje.sansomatchingwalkingmateapi.model;
+package com.pje.sansomatchingwalkingmateapi.model.common;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,4 +10,3 @@ public class CommonResult {
     private Integer code;
     private String msg;
 }
-

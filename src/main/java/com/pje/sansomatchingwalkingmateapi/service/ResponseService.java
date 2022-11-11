@@ -1,15 +1,15 @@
 package com.pje.sansomatchingwalkingmateapi.service;
 
 import com.pje.sansomatchingwalkingmateapi.enums.ResultCode;
-import com.pje.sansomatchingwalkingmateapi.model.CommonResult;
-import com.pje.sansomatchingwalkingmateapi.model.ListResult;
-import com.pje.sansomatchingwalkingmateapi.model.SingleResult;
+import com.pje.sansomatchingwalkingmateapi.model.common.CommonResult;
+import com.pje.sansomatchingwalkingmateapi.model.common.ListResult;
+import com.pje.sansomatchingwalkingmateapi.model.common.SingleResult;
 import org.springframework.stereotype.Service;
 
 @Service
 
 public class ResponseService {
-    public static <T>ListResult<T> getListResult(ListResult<T> result, boolean isSuccess) {
+    public static <T> ListResult<T> getListResult(ListResult<T> result, boolean isSuccess) {
         if (isSuccess) setSuccessResult(result);
         else setFailResult(result);
         return result;

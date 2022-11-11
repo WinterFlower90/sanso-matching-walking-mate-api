@@ -2,7 +2,7 @@ package com.pje.sansomatchingwalkingmateapi.controller;
 
 import com.pje.sansomatchingwalkingmateapi.exception.CAccessDeniedException;
 import com.pje.sansomatchingwalkingmateapi.exception.CAuthenticationEntryPointException;
-import com.pje.sansomatchingwalkingmateapi.model.CommonResult;
+import com.pje.sansomatchingwalkingmateapi.model.common.CommonResult;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
