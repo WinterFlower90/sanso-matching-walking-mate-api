@@ -37,6 +37,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+        /*
+    flutter 에서 header에 token 넣는법
+    String? token = await TokenLib.getToken();
+
+    Dio dio = Dio();
+    dio.options.headers['Authorization'] = 'Bearer ' + token!; <-- 한줄 추가
+
+    --- 아래 동일
+     */
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -51,6 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .antMatchers("/v1/auth-test/test-admin").hasAnyRole("ADMIN") // /v1/test/로 시작하는 모든 주소는 ROLE_ADMIN, ROLE_USER 권한을 가진 유저만 접근 가능함.
                         .antMatchers("/v1/auth-test/test-user").hasAnyRole("USER") // /v1/test/로 시작하는 모든 주소는 ROLE_ADMIN, ROLE_USER 권한을 가진 유저만 접근 가능함.
                         .antMatchers("/v1/auth-test/test-all").hasAnyRole("ADMIN", "USER") // /v1/test/로 시작하는 모든 주소는 ROLE_ADMIN, ROLE_USER 권한을 가진 유저만 접근 가능함.
+                        .antMatchers("/v1/auth-test/login-all/**").hasAnyRole("ADMIN", "USER")
                         .anyRequest().hasRole("ADMIN") // 기본 접근 권한은 ROLE_ADMIN
                 //고쳐서 사용하는 부분 끝
                 .and()

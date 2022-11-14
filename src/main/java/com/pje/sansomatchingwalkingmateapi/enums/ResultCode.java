@@ -15,6 +15,9 @@ public enum ResultCode {
 
     ,MISSING_DATA(-10000,"데이터를 찾을 수 없습니다.")
     ,WRONG_PHONE_NUMBER(-10001, "잘못된 핸드폰 번호입니다.")
+    ,WRONG_USERNAME_TYPE(-10002, "잘못된 아이디 형식입니다.")
+    ,WRONG_PASSWORD_MATCH(-10003, "비밀번호가 일치하지 않습니다.")
+    ,ALREADY_DUPLICATE_ID(-10004, "중복된 아이디가 존재합니다.")
 
     ,NO_MEMBER_DATA(-20000, "회원정보가 없습니다.")
     ;

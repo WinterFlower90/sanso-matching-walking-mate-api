@@ -55,5 +55,23 @@ public class ExceptionAdvice {
         return ResponseService.getFailResult(ResultCode.WRONG_PHONE_NUMBER);
     }
 
+    @ExceptionHandler(CAlreadyDuplicateId.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected CommonResult customException(HttpServletRequest request, CAlreadyDuplicateId e) {
+        return ResponseService.getFailResult(ResultCode.ALREADY_DUPLICATE_ID);
+    }
+
+    @ExceptionHandler(CWrongPasswordMatch.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected CommonResult customException(HttpServletRequest request, CWrongPasswordMatch e) {
+        return ResponseService.getFailResult(ResultCode.WRONG_PASSWORD_MATCH);
+    }
+
+    @ExceptionHandler(CWrongUsernameType.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected CommonResult customException(HttpServletRequest request, CWrongUsernameType e) {
+        return ResponseService.getFailResult(ResultCode.WRONG_USERNAME_TYPE);
+    }
+
 }
 

@@ -2,7 +2,10 @@ package com.pje.sansomatchingwalkingmateapi.service;
 
 import com.pje.sansomatchingwalkingmateapi.entity.Member;
 import com.pje.sansomatchingwalkingmateapi.enums.MemberGroup;
+import com.pje.sansomatchingwalkingmateapi.exception.CAlreadyDuplicateId;
+import com.pje.sansomatchingwalkingmateapi.exception.CWrongPasswordMatch;
 import com.pje.sansomatchingwalkingmateapi.exception.CWrongPhoneNumberException;
+import com.pje.sansomatchingwalkingmateapi.exception.CWrongUsernameType;
 import com.pje.sansomatchingwalkingmateapi.lib.CommonCheck;
 import com.pje.sansomatchingwalkingmateapi.model.member.MemberCreateRequest;
 import com.pje.sansomatchingwalkingmateapi.repository.MemberRepository;
@@ -33,9 +36,9 @@ public class MemberDataService {
     }
 
     public void setMember(MemberGroup memberGroup, MemberCreateRequest createRequest) {
-        if (!CommonCheck.checkUsername(createRequest.getUsername())) throw new CWrongPhoneNumberException(); // 유효한 아이디 형식이 아닙니다 던지기
-        if (!createRequest.getPassword().equals(createRequest.getPasswordRe())) throw new CWrongPhoneNumberException(); // 비밀번호가 일치하지 않습니다 던지기
-        if (!isNewUsername(createRequest.getUsername())) throw new CWrongPhoneNumberException(); // 중복된 아이디가 존재합니다 던지기
+        if (!CommonCheck.checkUsername(createRequest.getUsername())) throw new CWrongUsernameType(); // 유효한 아이디 형식이 아닙니다 던지기
+        if (!createRequest.getPassword().equals(createRequest.getPasswordRe())) throw new CWrongPasswordMatch(); // 비밀번호가 일치하지 않습니다 던지기
+        if (!isNewUsername(createRequest.getUsername())) throw new CAlreadyDuplicateId(); // 중복된 아이디가 존재합니다 던지기
 
         createRequest.setPassword(passwordEncoder.encode(createRequest.getPassword()));
 
