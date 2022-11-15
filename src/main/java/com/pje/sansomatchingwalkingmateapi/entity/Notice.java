@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -32,7 +33,11 @@ public class Notice {
 
     @ApiModelProperty(notes = "공지 유무")
     @Column(nullable = false) //기본값 true. 공지에서 내리고 싶을때 false
-    private boolean isEnable;
+    private boolean noticeIsEnable;
+
+    @ApiModelProperty(notes = "게시 날짜")
+    @Column(nullable = false)
+    private LocalDate datePost;
 
     @ApiModelProperty(notes = "등록시간")
     @Column(nullable = false)
@@ -54,11 +59,36 @@ public class Notice {
     @Column(nullable = true)
     private LocalDateTime dateUpload;
 
+    //공지에서 내리기
+    public void putNoticeEnable() {
+        this.noticeIsEnable = false;
+        this.dateUpdate = LocalDateTime.now();
+    }
+
+    //공지사항 수정
+    public void putNotice(NoticeCreateRequest request) {
+        this.title = request.getTitle();
+        this.note = request.getNote();
+        this.writer = request.getWriter();
+        this.noticeIsEnable = true;
+        this.dateUpdate = LocalDateTime.now();
+        this.uploadFile = request.getUploadFile();
+        this.fileName = request.getFileName();
+        this.dateUpload = dateUpload;
+
+        if (uploadFile != null) {
+            this.dateUpload = LocalDateTime.now();
+        } else {
+            this.dateUpload = null;
+        }
+    }
+
     private Notice(NoticeBuilder builder) {
         this.title = builder.title;
         this.note = builder.note;
         this.writer = builder.writer;
-        this.isEnable = builder.isEnable;
+        this.noticeIsEnable = builder.noticeIsEnable;
+        this.datePost = builder.datePost;
         this.dateCreate = builder.dateCreate;
         this.dateUpdate = builder.dateUpdate;
         this.uploadFile = builder.uploadFile;
@@ -70,7 +100,8 @@ public class Notice {
         private final String title;
         private final String note;
         private final String writer;
-        private final boolean isEnable;
+        private final boolean noticeIsEnable;
+        private final LocalDate datePost;
         private final LocalDateTime dateCreate;
         private final LocalDateTime dateUpdate;
         private String uploadFile;
@@ -82,7 +113,8 @@ public class Notice {
             this.title = request.getTitle();
             this.note = request.getNote();
             this.writer = request.getWriter();
-            this.isEnable = true;
+            this.noticeIsEnable = true;
+            this.datePost = LocalDate.now();
             this.dateCreate = LocalDateTime.now();
             this.dateUpdate = LocalDateTime.now();
             this.uploadFile = request.getUploadFile();
