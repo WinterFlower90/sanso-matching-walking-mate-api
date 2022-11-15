@@ -4,7 +4,6 @@ import com.pje.sansomatchingwalkingmateapi.entity.Member;
 import com.pje.sansomatchingwalkingmateapi.exception.CUserNameSignException;
 import com.pje.sansomatchingwalkingmateapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
     private final MemberRepository memberRepository;
-    private final AccountStatusUserDetailsChecker detailsChecker = new AccountStatusUserDetailsChecker();
 
 
     /** 로그인 아이디로 사용자 체크하기
@@ -27,7 +25,6 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Member member = memberRepository.findByUsername(username).orElseThrow(CUserNameSignException::new);
-        detailsChecker.check(member);
         return member;
     }
 }
