@@ -51,8 +51,8 @@ public class ProfileResponse {
             this.memberGroup = member.getMemberGroup().toString();
             this.memberGroupName = member.getMemberGroup().getName();
             this.username = member.getUsername();
-            this.name = member.getName();
-            this.dateCreate = CommonFormat.convertLocalDateTimeToString(member.getDateCreate());
+            this.name = member.getNickName();
+            this.dateCreate = CommonFormat.convertLocalDateTimeToString(member.getDateJoin());
         }
 
         @Override

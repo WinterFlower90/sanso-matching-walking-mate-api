@@ -3,7 +3,7 @@ package com.pje.sansomatchingwalkingmateapi.advice;
 import com.pje.sansomatchingwalkingmateapi.enums.ResultCode;
 import com.pje.sansomatchingwalkingmateapi.exception.*;
 import com.pje.sansomatchingwalkingmateapi.model.common.CommonResult;
-import com.pje.sansomatchingwalkingmateapi.service.ResponseService;
+import com.pje.sansomatchingwalkingmateapi.service.common.ResponseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

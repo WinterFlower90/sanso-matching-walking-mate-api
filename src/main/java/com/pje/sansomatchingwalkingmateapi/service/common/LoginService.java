@@ -1,4 +1,4 @@
-package com.pje.sansomatchingwalkingmateapi.service;
+package com.pje.sansomatchingwalkingmateapi.service.common;
 
 import com.pje.sansomatchingwalkingmateapi.configure.JwtTokenProvider;
 import com.pje.sansomatchingwalkingmateapi.entity.Member;
@@ -38,6 +38,6 @@ public class LoginService {
 
         String token = jwtTokenProvider.createToken(String.valueOf(member.getUsername()), member.getMemberGroup().toString(), loginType);
 
-        return new LoginResponse.LoginResponseBuilder(token, member.getName()).build();
+        return new LoginResponse.LoginResponseBuilder(token).build();
     }
 }

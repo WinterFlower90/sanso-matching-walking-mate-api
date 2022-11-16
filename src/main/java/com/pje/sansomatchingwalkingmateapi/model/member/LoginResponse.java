@@ -12,21 +12,15 @@ public class LoginResponse {
     @ApiModelProperty(notes = "토큰")
     private String token;
 
-    @ApiModelProperty(notes = "이름")
-    private String name;
-
     private LoginResponse(LoginResponseBuilder builder) {
         this.token = builder.token;
-        this.name = builder.name;
     }
 
     public static class LoginResponseBuilder implements CommonModelBuilder<LoginResponse> {
         private final String token;
-        private final String name;
 
-        public LoginResponseBuilder(String token, String name) {
+        public LoginResponseBuilder(String token) {
             this.token = token;
-            this.name = name;
         }
 
         @Override

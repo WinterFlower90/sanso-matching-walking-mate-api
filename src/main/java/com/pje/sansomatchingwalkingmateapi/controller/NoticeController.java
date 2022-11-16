@@ -6,7 +6,7 @@ import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeCreateRequest;
 import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeListItem;
 import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeSearchRequest;
 import com.pje.sansomatchingwalkingmateapi.service.NoticeService;
-import com.pje.sansomatchingwalkingmateapi.service.ResponseService;
+import com.pje.sansomatchingwalkingmateapi.service.common.ResponseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

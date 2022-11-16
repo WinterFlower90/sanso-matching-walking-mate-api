@@ -1,4 +1,4 @@
-package com.pje.sansomatchingwalkingmateapi.service;
+package com.pje.sansomatchingwalkingmateapi.service.common;
 
 import com.pje.sansomatchingwalkingmateapi.entity.Member;
 import com.pje.sansomatchingwalkingmateapi.exception.CUserNameSignException;

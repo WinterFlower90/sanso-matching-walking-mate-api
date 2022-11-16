@@ -1,17 +1,17 @@
 package com.pje.sansomatchingwalkingmateapi.service;
 
 import com.pje.sansomatchingwalkingmateapi.entity.Member;
+import com.pje.sansomatchingwalkingmateapi.enums.Gender;
 import com.pje.sansomatchingwalkingmateapi.enums.MemberGroup;
-import com.pje.sansomatchingwalkingmateapi.exception.CAlreadyDuplicateId;
-import com.pje.sansomatchingwalkingmateapi.exception.CWrongPasswordMatch;
-import com.pje.sansomatchingwalkingmateapi.exception.CWrongPhoneNumberException;
-import com.pje.sansomatchingwalkingmateapi.exception.CWrongUsernameType;
+import com.pje.sansomatchingwalkingmateapi.exception.*;
 import com.pje.sansomatchingwalkingmateapi.lib.CommonCheck;
 import com.pje.sansomatchingwalkingmateapi.model.member.MemberCreateRequest;
 import com.pje.sansomatchingwalkingmateapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +29,12 @@ public class MemberDataService {
             createRequest.setUsername(username);
             createRequest.setPassword(password);
             createRequest.setPasswordRe(password);
-            createRequest.setName("최고관리자");
+            createRequest.setNickName("최고관리자");
+            createRequest.setGender(Gender.MAN);
+            createRequest.setBirthDay(LocalDate.now());
+            createRequest.setPhone("070-1234-1234");
+            createRequest.setIsPet(false);
+
 
             setMember(MemberGroup.ROLE_ADMIN, createRequest);
         }
@@ -50,4 +55,14 @@ public class MemberDataService {
         long dupCount = memberRepository.countByUsername(username);
         return dupCount <= 0;
     }
+
+    /**
+     * 회원정보 가져오기
+     * @param memberId 회원 시퀀스
+     * @return 해당 회원정보
+     */
+    public Member getMember(long memberId) {
+        return memberRepository.findById(memberId).orElseThrow(CMissingDataException::new);
+    }
+
 }

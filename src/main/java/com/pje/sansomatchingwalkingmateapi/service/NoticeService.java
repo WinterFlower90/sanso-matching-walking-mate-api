@@ -7,6 +7,7 @@ import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeCreateRequest;
 import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeListItem;
 import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeSearchRequest;
 import com.pje.sansomatchingwalkingmateapi.repository.NoticeRepository;
+import com.pje.sansomatchingwalkingmateapi.service.common.ListConvertService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,6 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
