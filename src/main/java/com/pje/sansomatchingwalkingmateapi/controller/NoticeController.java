@@ -1,11 +1,14 @@
 package com.pje.sansomatchingwalkingmateapi.controller;
 
+import com.pje.sansomatchingwalkingmateapi.entity.Member;
 import com.pje.sansomatchingwalkingmateapi.model.common.CommonResult;
 import com.pje.sansomatchingwalkingmateapi.model.common.ListResult;
 import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeCreateRequest;
 import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeListItem;
 import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeSearchRequest;
+import com.pje.sansomatchingwalkingmateapi.service.MemberDataService;
 import com.pje.sansomatchingwalkingmateapi.service.NoticeService;
+import com.pje.sansomatchingwalkingmateapi.service.common.ProfileService;
 import com.pje.sansomatchingwalkingmateapi.service.common.ResponseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -23,11 +26,13 @@ import javax.validation.Valid;
 @RequestMapping("/v1/notice")
 public class NoticeController {
     private final NoticeService noticeService;
+    private final ProfileService profileService;
 
     @ApiOperation(value = "공지사항 등록하기")
     @PostMapping("/new")
     public CommonResult setNotice(@RequestBody @Valid NoticeCreateRequest request) {
-        noticeService.setNotice(request);
+        Member member = profileService.getMemberData();
+        noticeService.setNotice(member, request);
         return ResponseService.getSuccessResult();
     }
 
@@ -51,6 +56,12 @@ public class NoticeController {
         return ResponseService.getSuccessResult();
     }
 
+    @ApiOperation(value = "공지사항 전체 리스트 조회")
+    @GetMapping("/list/all")
+    public ListResult<NoticeListItem> getNoticeList() {
+        return ResponseService.getListResult(noticeService.getNoticeList(), true);
+    }
+
     @ApiOperation(value = "공지사항 유효한 게시물 + 작성일자 기간별 리스트 조회")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "페이지 숫자", required = true),
@@ -59,11 +70,4 @@ public class NoticeController {
     public ListResult<NoticeListItem> getEnableNoticeList(@PathVariable int pageNum, @RequestBody @Valid NoticeSearchRequest searchRequest) {
         return ResponseService.getListResult(noticeService.getEnableNoticeList(pageNum, searchRequest), true);
     }
-
-    @ApiOperation(value = "공지사항 전체 리스트 조회")
-    @GetMapping("/list/all")
-    public ListResult<NoticeListItem> getNoticeList() {
-        return ResponseService.getListResult(noticeService.getNoticeList(), true);
-    }
-
 }

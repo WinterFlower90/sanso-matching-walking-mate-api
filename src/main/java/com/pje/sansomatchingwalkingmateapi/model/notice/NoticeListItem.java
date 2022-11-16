@@ -1,5 +1,6 @@
 package com.pje.sansomatchingwalkingmateapi.model.notice;
 
+import com.pje.sansomatchingwalkingmateapi.entity.Member;
 import com.pje.sansomatchingwalkingmateapi.entity.Notice;
 import com.pje.sansomatchingwalkingmateapi.interfaces.CommonModelBuilder;
 import lombok.AccessLevel;

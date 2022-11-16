@@ -21,11 +21,6 @@ public class NoticeCreateRequest {
     @Length(min = 10)
     private String note;
 
-    @ApiModelProperty(notes = "공지사항 작성자")
-    @NotNull
-    @Length(min = 2, max = 20)
-    private String writer;
-
     @ApiModelProperty(notes = "첨부파일")
     private String uploadFile;
 

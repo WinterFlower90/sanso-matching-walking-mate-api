@@ -63,6 +63,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .antMatchers("/v1/auth-test/test-all").hasAnyRole("ADMIN", "USER") // /v1/test/로 시작하는 모든 주소는 ROLE_ADMIN, ROLE_USER 권한을 가진 유저만 접근 가능함.
                         .antMatchers("/v1/auth-test/login-all/**").hasAnyRole("ADMIN", "USER")
                         .antMatchers("/v1/member/join").permitAll() // [일반유저/관리자] 회원등록
+                //공지사항
+                        .antMatchers("/v1/notice/new").hasAnyRole("ADMIN") // [관리자] 공지사항 등록(C)
+                        .antMatchers("/v1/notice/list/all").hasAnyRole("ADMIN") // [관리자] 전체 공지사항 조회(R)
+                        .antMatchers("/v1/notice/list/page/**").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 유효 공지사항 조회(R)
+                        .antMatchers("/v1/notice/put/**").hasAnyRole("ADMIN") // [관리자] 공지사항 수정(U)
+                        .antMatchers("/v1/notice/enable/**").hasAnyRole("ADMIN") // [관리자] 공지사항 게시여부 수정(U)
                 // 산책장소 API
                         .antMatchers("/v1/walking-address/new").hasAnyRole("ADMIN") // [관리자] 산책 장소 등록(C)
                         .antMatchers("/v1/walking-address/data").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 산책 리스트(R)

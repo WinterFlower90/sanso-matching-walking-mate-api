@@ -1,5 +1,6 @@
 package com.pje.sansomatchingwalkingmateapi.service;
 
+import com.pje.sansomatchingwalkingmateapi.entity.Member;
 import com.pje.sansomatchingwalkingmateapi.entity.Notice;
 import com.pje.sansomatchingwalkingmateapi.exception.CMissingDataException;
 import com.pje.sansomatchingwalkingmateapi.model.common.ListResult;
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -30,9 +32,10 @@ public class NoticeService {
     /** 공지사항 등록
      * @param request 항목 값 입력
      */
-    public void setNotice(NoticeCreateRequest request) {
-        Notice notice = new Notice.NoticeBuilder(request).build();
+    public void setNotice(Member member, NoticeCreateRequest request) {
+        Notice notice = new Notice.NoticeBuilder(member, request).build();
         noticeRepository.save(notice);
+
     }
 
     /** 공지사항 수정

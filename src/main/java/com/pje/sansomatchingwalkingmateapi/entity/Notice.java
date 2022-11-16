@@ -19,6 +19,11 @@ public class Notice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ApiModelProperty(notes = "회원 이름 받아오기위해 join")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "memberId", nullable = false)
+    private Member member;
+
     @ApiModelProperty(notes = "공지사항 제목")
     @Column(nullable = false, length = 20)
     private String title;
@@ -69,7 +74,6 @@ public class Notice {
     public void putNotice(NoticeCreateRequest request) {
         this.title = request.getTitle();
         this.note = request.getNote();
-        this.writer = request.getWriter();
         this.noticeIsEnable = true;
         this.dateUpdate = LocalDateTime.now();
         this.uploadFile = request.getUploadFile();
@@ -84,6 +88,7 @@ public class Notice {
     }
 
     private Notice(NoticeBuilder builder) {
+        this.member = builder.member;
         this.title = builder.title;
         this.note = builder.note;
         this.writer = builder.writer;
@@ -97,6 +102,7 @@ public class Notice {
     }
 
     public static class NoticeBuilder implements CommonModelBuilder<Notice> {
+        private final Member member;
         private final String title;
         private final String note;
         private final String writer;
@@ -109,10 +115,11 @@ public class Notice {
         private LocalDateTime dateUpload;
 
 
-        public NoticeBuilder(NoticeCreateRequest request) {
+        public NoticeBuilder(Member member, NoticeCreateRequest request) {
+            this.member = member;
             this.title = request.getTitle();
             this.note = request.getNote();
-            this.writer = request.getWriter();
+            this.writer = member.getNickName();
             this.noticeIsEnable = true;
             this.datePost = LocalDate.now();
             this.dateCreate = LocalDateTime.now();
