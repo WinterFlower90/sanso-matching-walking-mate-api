@@ -1,10 +1,12 @@
 package com.pje.sansomatchingwalkingmateapi.entity;
 
 import com.pje.sansomatchingwalkingmateapi.enums.keyword.ValuesTypeFriend;
-import com.pje.sansomatchingwalkingmateapi.enums.keyword.ValuesTypePet;
 import com.pje.sansomatchingwalkingmateapi.enums.keyword.ValuesTypeWalking;
 import com.pje.sansomatchingwalkingmateapi.interfaces.CommonModelBuilder;
 import com.pje.sansomatchingwalkingmateapi.model.keyword.KeywordCreateRequest;
+import com.pje.sansomatchingwalkingmateapi.model.keyword.KeywordFriendIWantUpdateRequest;
+import com.pje.sansomatchingwalkingmateapi.model.keyword.KeywordFriendYouWantUpdateRequest;
+import com.pje.sansomatchingwalkingmateapi.model.keyword.KeywordWalkingUpdateRequest;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -26,25 +28,6 @@ public class Keyword {
     @JoinColumn(name = "memberId", nullable = false)
     private Member member;
 
-    @ApiModelProperty(notes = "펫 성격(선택)")
-    @Column(nullable = true, length = 30)
-    @Enumerated(value = EnumType.STRING)
-    private ValuesTypePet valuesTypePet1;
-
-    @ApiModelProperty(notes = "펫 성격(선택)")
-    @Column(nullable = true, length = 30)
-    @Enumerated(value = EnumType.STRING)
-    private ValuesTypePet valuesTypePet2;
-
-    @ApiModelProperty(notes = "펫 성격(선택)")
-    @Column(nullable = true, length = 30)
-    @Enumerated(value = EnumType.STRING)
-    private ValuesTypePet valuesTypePet3;
-
-    @ApiModelProperty(notes = "펫 성격(선택)")
-    @Column(nullable = true, length = 30)
-    @Enumerated(value = EnumType.STRING)
-    private ValuesTypePet valuesTypePet4;
 
     //
 
@@ -146,17 +129,46 @@ public class Keyword {
     @Column(nullable = false)
     private LocalDateTime dateCreate;
 
-    @ApiModelProperty(notes = "등록시간")
+    @ApiModelProperty(notes = "수정시간")
     @Column(nullable = false)
     private LocalDateTime dateUpdate;
 
 
+    public void putKeywordWalking(Member member, KeywordWalkingUpdateRequest updateRequest) {
+        this.member = member;
+        this.valuesTypeWalking1 = updateRequest.getValuesTypeWalking1();
+        this.valuesTypeWalking2 = updateRequest.getValuesTypeWalking2();
+        this.valuesTypeWalking3 = updateRequest.getValuesTypeWalking3();
+        this.valuesTypeWalking4 = updateRequest.getValuesTypeWalking4();
+        this.valuesTypeWalking5 = updateRequest.getValuesTypeWalking5();
+        this.valuesTypeWalking6 = updateRequest.getValuesTypeWalking6();
+        this.dateUpdate = LocalDateTime.now();
+    }
+
+    public void putKeywordFriendIWant(Member member, KeywordFriendIWantUpdateRequest updateRequest) {
+        this.member = member;
+        this.valuesTypeFriendIWant1 = updateRequest.getValuesTypeFriendIWant1();
+        this.valuesTypeFriendIWant2 = updateRequest.getValuesTypeFriendIWant2();
+        this.valuesTypeFriendIWant3 = updateRequest.getValuesTypeFriendIWant3();
+        this.valuesTypeFriendIWant4 = updateRequest.getValuesTypeFriendIWant4();
+        this.valuesTypeFriendIWant5 = updateRequest.getValuesTypeFriendIWant5();
+        this.valuesTypeFriendIWant6 = updateRequest.getValuesTypeFriendIWant6();
+        this.dateUpdate = LocalDateTime.now();
+    }
+
+    public void putKeywordFriendYouWant(Member member, KeywordFriendYouWantUpdateRequest updateRequest) {
+        this.member = member;
+        this.valuesTypeFriendYouWant1 = updateRequest.getValuesTypeFriendYouWant1();
+        this.valuesTypeFriendYouWant2 = updateRequest.getValuesTypeFriendYouWant2();
+        this.valuesTypeFriendYouWant3 = updateRequest.getValuesTypeFriendYouWant3();
+        this.valuesTypeFriendYouWant4 = updateRequest.getValuesTypeFriendYouWant4();
+        this.valuesTypeFriendYouWant5 = updateRequest.getValuesTypeFriendYouWant5();
+        this.valuesTypeFriendYouWant6 = updateRequest.getValuesTypeFriendYouWant6();
+        this.dateUpdate = LocalDateTime.now();
+    }
+
     private Keyword(KeywordBuilder builder) {
         this.member = builder.member;
-        this.valuesTypePet1 = builder.valuesTypePet1;
-        this.valuesTypePet2 = builder.valuesTypePet2;
-        this.valuesTypePet3 = builder.valuesTypePet3;
-        this.valuesTypePet4 = builder.valuesTypePet4;
         this.valuesTypeWalking1 = builder.valuesTypeWalking1;
         this.valuesTypeWalking2 = builder.valuesTypeWalking2;
         this.valuesTypeWalking3 = builder.valuesTypeWalking3;
@@ -181,10 +193,6 @@ public class Keyword {
 
     public static class KeywordBuilder implements CommonModelBuilder<Keyword> {
         private final Member member;
-        private ValuesTypePet valuesTypePet1;
-        private ValuesTypePet valuesTypePet2;
-        private ValuesTypePet valuesTypePet3;
-        private ValuesTypePet valuesTypePet4;
         private final ValuesTypeWalking valuesTypeWalking1;
         private final ValuesTypeWalking valuesTypeWalking2;
         private final ValuesTypeWalking valuesTypeWalking3;
@@ -208,10 +216,6 @@ public class Keyword {
 
         public KeywordBuilder(Member member, KeywordCreateRequest request) {
             this.member = member;
-            this.valuesTypePet1 = request.getValuesTypePet1();
-            this.valuesTypePet2 = request.getValuesTypePet2();
-            this.valuesTypePet3 = request.getValuesTypePet3();
-            this.valuesTypePet4 = request.getValuesTypePet4();
             this.valuesTypeWalking1 = request.getValuesTypeWalking1();
             this.valuesTypeWalking2 = request.getValuesTypeWalking2();
             this.valuesTypeWalking3 = request.getValuesTypeWalking3();

@@ -15,9 +15,6 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 public class KeywordCreateRequest {
-    @ApiModelProperty(notes = "회원 시퀀스", required = true)
-    @NotNull
-    private Long memberId;
 
     @ApiModelProperty(notes = "펫 성격(선택)")
     @Enumerated(value = EnumType.STRING)
