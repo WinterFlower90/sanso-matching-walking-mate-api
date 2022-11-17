@@ -71,7 +71,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .antMatchers("/v1/notice/enable/**").hasAnyRole("ADMIN") // [관리자] 공지사항 게시여부 수정(U)
                 //키워드
                         .antMatchers("/v1/keyword/new").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 키워드 등록(C)
-                        .antMatchers("/v1/keyword/list/**").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 키워드 리스트 조회(R)
+                        .antMatchers("/v1/keyword/list/walking").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 키워드-산책관 리스트 조회(R)
+                        .antMatchers("/v1/keyword/list/friend-i-want").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 키워드-나는 이런친구가 좋아요 리스트 조회(R)
+                        .antMatchers("/v1/keyword/list/friend-you-want").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 키워드-나는 이런친구가 될게요 리스트 조회(R)
+                        .antMatchers("/v1/keyword/put/walking").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 키워드-산책관 수정(U)
+                        .antMatchers("/v1/keyword/put/friend-i-want").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 키워드-나는 이런친구가 좋아요 수정(U)
+                        .antMatchers("/v1/keyword/put/friend-you-want").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 키워드-나는 이런친구가 될게요 수정(U)
                 // 산책장소 API
                         .antMatchers("/v1/walking-address/new").hasAnyRole("ADMIN") // [관리자] 산책 장소 등록(C)
                         .antMatchers("/v1/walking-address/data").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 산책 리스트(R)
