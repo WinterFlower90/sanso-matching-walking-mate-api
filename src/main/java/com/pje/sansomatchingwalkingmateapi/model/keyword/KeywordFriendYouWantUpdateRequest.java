@@ -16,34 +16,28 @@ public class KeywordFriendYouWantUpdateRequest {
 
     @ApiModelProperty(notes = "내가 될 친구상(필수)")
     @NotNull
-    @Length(max = 30)
     @Enumerated(value = EnumType.STRING)
     private ValuesTypeFriend valuesTypeFriendYouWant1;
 
     @ApiModelProperty(notes = "내가 될 친구상(필수)")
     @NotNull
-    @Length(max = 30)
     @Enumerated(value = EnumType.STRING)
     private ValuesTypeFriend valuesTypeFriendYouWant2;
 
     @ApiModelProperty(notes = "내가 될 친구상(필수)")
     @NotNull
-    @Length(max = 30)
     @Enumerated(value = EnumType.STRING)
     private ValuesTypeFriend valuesTypeFriendYouWant3;
 
     @ApiModelProperty(notes = "내가 될 친구상(선택)")
-    @Length(max = 30)
     @Enumerated(value = EnumType.STRING)
     private ValuesTypeFriend valuesTypeFriendYouWant4;
 
     @ApiModelProperty(notes = "내가 될 친구상(선택)")
-    @Length(max = 30)
     @Enumerated(value = EnumType.STRING)
     private ValuesTypeFriend valuesTypeFriendYouWant5;
 
     @ApiModelProperty(notes = "내가 될 친구상(선택)")
-    @Length(max = 30)
     @Enumerated(value = EnumType.STRING)
     private ValuesTypeFriend valuesTypeFriendYouWant6;
 }

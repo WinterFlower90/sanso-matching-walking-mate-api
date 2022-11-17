@@ -69,6 +69,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .antMatchers("/v1/notice/list/page/**").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 유효 공지사항 조회(R)
                         .antMatchers("/v1/notice/put/**").hasAnyRole("ADMIN") // [관리자] 공지사항 수정(U)
                         .antMatchers("/v1/notice/enable/**").hasAnyRole("ADMIN") // [관리자] 공지사항 게시여부 수정(U)
+                //키워드
+                        .antMatchers("/v1/keyword/new").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 키워드 등록(C)
+                        .antMatchers("/v1/keyword/list/**").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 키워드 리스트 조회(R)
                 // 산책장소 API
                         .antMatchers("/v1/walking-address/new").hasAnyRole("ADMIN") // [관리자] 산책 장소 등록(C)
                         .antMatchers("/v1/walking-address/data").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 산책 리스트(R)

@@ -26,10 +26,8 @@ import java.util.Optional;
 public class NoticeService {
     private final NoticeRepository noticeRepository;
 
-    @PersistenceContext
-    EntityManager entityManager;
-
     /** 공지사항 등록
+     * @param member 회원 엔티티 받는다
      * @param request 항목 값 입력
      */
     public void setNotice(Member member, NoticeCreateRequest request) {

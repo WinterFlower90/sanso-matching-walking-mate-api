@@ -26,6 +26,8 @@ public enum ValuesTypeFriend {
     LIKE_PET ("동물을 좋아하는"),
     LIKE_SNACK ("간식을 좋아하는"),
     LIKE_COFFEE ("커피를 좋아하는"),
+
+    NONE ("선택안함")
     ;
     private final String name;
 }

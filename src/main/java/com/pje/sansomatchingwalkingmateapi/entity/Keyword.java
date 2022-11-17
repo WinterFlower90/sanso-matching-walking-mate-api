@@ -134,8 +134,7 @@ public class Keyword {
     private LocalDateTime dateUpdate;
 
 
-    public void putKeywordWalking(Member member, KeywordWalkingUpdateRequest updateRequest) {
-        this.member = member;
+    public void putKeywordWalking(KeywordWalkingUpdateRequest updateRequest) {
         this.valuesTypeWalking1 = updateRequest.getValuesTypeWalking1();
         this.valuesTypeWalking2 = updateRequest.getValuesTypeWalking2();
         this.valuesTypeWalking3 = updateRequest.getValuesTypeWalking3();
@@ -145,8 +144,7 @@ public class Keyword {
         this.dateUpdate = LocalDateTime.now();
     }
 
-    public void putKeywordFriendIWant(Member member, KeywordFriendIWantUpdateRequest updateRequest) {
-        this.member = member;
+    public void putKeywordFriendIWant(KeywordFriendIWantUpdateRequest updateRequest) {
         this.valuesTypeFriendIWant1 = updateRequest.getValuesTypeFriendIWant1();
         this.valuesTypeFriendIWant2 = updateRequest.getValuesTypeFriendIWant2();
         this.valuesTypeFriendIWant3 = updateRequest.getValuesTypeFriendIWant3();
@@ -156,8 +154,7 @@ public class Keyword {
         this.dateUpdate = LocalDateTime.now();
     }
 
-    public void putKeywordFriendYouWant(Member member, KeywordFriendYouWantUpdateRequest updateRequest) {
-        this.member = member;
+    public void putKeywordFriendYouWant(KeywordFriendYouWantUpdateRequest updateRequest) {
         this.valuesTypeFriendYouWant1 = updateRequest.getValuesTypeFriendYouWant1();
         this.valuesTypeFriendYouWant2 = updateRequest.getValuesTypeFriendYouWant2();
         this.valuesTypeFriendYouWant3 = updateRequest.getValuesTypeFriendYouWant3();

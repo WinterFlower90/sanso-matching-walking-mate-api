@@ -21,7 +21,9 @@ public enum ValuesTypeWalking {
     POSSIBLE_HIKING ("등산 가능"),
 
     SLOW_WALK ("천천히 걸어요"),
-    FAST_WALK ("빨리 걸어")
+    FAST_WALK ("빨리 걸어"),
+
+    NONE ("선택안함")
     ;
     private final String name;
 }

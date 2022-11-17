@@ -16,34 +16,28 @@ public class KeywordWalkingUpdateRequest {
 
     @ApiModelProperty(notes = "산책관(필수)")
     @NotNull
-    @Length(max = 30)
     @Enumerated(value = EnumType.STRING)
     private ValuesTypeWalking valuesTypeWalking1;
 
     @ApiModelProperty(notes = "산책관(필수)")
     @NotNull
-    @Length(max = 30)
     @Enumerated(value = EnumType.STRING)
     private ValuesTypeWalking valuesTypeWalking2;
 
     @ApiModelProperty(notes = "산책관(필수)")
     @NotNull
-    @Length(max = 30)
     @Enumerated(value = EnumType.STRING)
     private ValuesTypeWalking valuesTypeWalking3;
 
     @ApiModelProperty(notes = "산책관(선택)")
-    @Length(max = 30)
     @Enumerated(value = EnumType.STRING)
     private ValuesTypeWalking valuesTypeWalking4;
 
     @ApiModelProperty(notes = "산책관(선택)")
-    @Length(max = 30)
     @Enumerated(value = EnumType.STRING)
     private ValuesTypeWalking valuesTypeWalking5;
 
     @ApiModelProperty(notes = "산책관(선택)")
-    @Length(max = 30)
     @Enumerated(value = EnumType.STRING)
     private ValuesTypeWalking valuesTypeWalking6;
 

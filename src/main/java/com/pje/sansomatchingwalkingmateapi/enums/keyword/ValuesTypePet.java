@@ -17,6 +17,8 @@ public enum ValuesTypePet {
     LIKE_PEOPLE ("사람을 좋아해요"),
     LIKE_PARK ("공원을 좋아해요"),
     LIKE_DOG ("강아지를 좋아해요"),
+
+    NONE ("선택안함")
     ;
     private final String name;
 }
