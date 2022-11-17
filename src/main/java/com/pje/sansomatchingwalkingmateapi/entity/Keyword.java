@@ -138,9 +138,9 @@ public class Keyword {
         this.valuesTypeWalking1 = updateRequest.getValuesTypeWalking1();
         this.valuesTypeWalking2 = updateRequest.getValuesTypeWalking2();
         this.valuesTypeWalking3 = updateRequest.getValuesTypeWalking3();
-        this.valuesTypeWalking4 = updateRequest.getValuesTypeWalking4();
-        this.valuesTypeWalking5 = updateRequest.getValuesTypeWalking5();
-        this.valuesTypeWalking6 = updateRequest.getValuesTypeWalking6();
+        this.valuesTypeWalking4 = updateRequest.getValuesTypeWalking4() == null ? ValuesTypeWalking.NONE : updateRequest.getValuesTypeWalking4();
+        this.valuesTypeWalking5 = updateRequest.getValuesTypeWalking5() == null ? ValuesTypeWalking.NONE : updateRequest.getValuesTypeWalking4();
+        this.valuesTypeWalking6 = updateRequest.getValuesTypeWalking6() == null ? ValuesTypeWalking.NONE : updateRequest.getValuesTypeWalking4();
         this.dateUpdate = LocalDateTime.now();
     }
 
@@ -148,9 +148,9 @@ public class Keyword {
         this.valuesTypeFriendIWant1 = updateRequest.getValuesTypeFriendIWant1();
         this.valuesTypeFriendIWant2 = updateRequest.getValuesTypeFriendIWant2();
         this.valuesTypeFriendIWant3 = updateRequest.getValuesTypeFriendIWant3();
-        this.valuesTypeFriendIWant4 = updateRequest.getValuesTypeFriendIWant4();
-        this.valuesTypeFriendIWant5 = updateRequest.getValuesTypeFriendIWant5();
-        this.valuesTypeFriendIWant6 = updateRequest.getValuesTypeFriendIWant6();
+        this.valuesTypeFriendIWant4 = updateRequest.getValuesTypeFriendIWant4() == null ? ValuesTypeFriend.NONE : updateRequest.getValuesTypeFriendIWant4();
+        this.valuesTypeFriendIWant5 = updateRequest.getValuesTypeFriendIWant5() == null ? ValuesTypeFriend.NONE : updateRequest.getValuesTypeFriendIWant5();
+        this.valuesTypeFriendIWant6 = updateRequest.getValuesTypeFriendIWant6() == null ? ValuesTypeFriend.NONE : updateRequest.getValuesTypeFriendIWant6();
         this.dateUpdate = LocalDateTime.now();
     }
 
@@ -158,9 +158,9 @@ public class Keyword {
         this.valuesTypeFriendYouWant1 = updateRequest.getValuesTypeFriendYouWant1();
         this.valuesTypeFriendYouWant2 = updateRequest.getValuesTypeFriendYouWant2();
         this.valuesTypeFriendYouWant3 = updateRequest.getValuesTypeFriendYouWant3();
-        this.valuesTypeFriendYouWant4 = updateRequest.getValuesTypeFriendYouWant4();
-        this.valuesTypeFriendYouWant5 = updateRequest.getValuesTypeFriendYouWant5();
-        this.valuesTypeFriendYouWant6 = updateRequest.getValuesTypeFriendYouWant6();
+        this.valuesTypeFriendYouWant4 = updateRequest.getValuesTypeFriendYouWant4() == null ? ValuesTypeFriend.NONE : updateRequest.getValuesTypeFriendYouWant4();
+        this.valuesTypeFriendYouWant5 = updateRequest.getValuesTypeFriendYouWant5() == null ? ValuesTypeFriend.NONE : updateRequest.getValuesTypeFriendYouWant5();
+        this.valuesTypeFriendYouWant6 = updateRequest.getValuesTypeFriendYouWant6() == null ? ValuesTypeFriend.NONE : updateRequest.getValuesTypeFriendYouWant6();
         this.dateUpdate = LocalDateTime.now();
     }
 
@@ -216,21 +216,21 @@ public class Keyword {
             this.valuesTypeWalking1 = request.getValuesTypeWalking1();
             this.valuesTypeWalking2 = request.getValuesTypeWalking2();
             this.valuesTypeWalking3 = request.getValuesTypeWalking3();
-            this.valuesTypeWalking4 = request.getValuesTypeWalking4();
-            this.valuesTypeWalking5 = request.getValuesTypeWalking5();
-            this.valuesTypeWalking6 = request.getValuesTypeWalking6();
+            this.valuesTypeWalking4 = request.getValuesTypeWalking4() == null ? ValuesTypeWalking.NONE : request.getValuesTypeWalking4();
+            this.valuesTypeWalking5 = request.getValuesTypeWalking5() == null ? ValuesTypeWalking.NONE : request.getValuesTypeWalking5();
+            this.valuesTypeWalking6 = request.getValuesTypeWalking6() == null ? ValuesTypeWalking.NONE : request.getValuesTypeWalking6();
             this.valuesTypeFriendIWant1 = request.getValuesTypeFriendIWant1();
             this.valuesTypeFriendIWant2 = request.getValuesTypeFriendIWant2();
             this.valuesTypeFriendIWant3 = request.getValuesTypeFriendIWant3();
-            this.valuesTypeFriendIWant4 = request.getValuesTypeFriendIWant4();
-            this.valuesTypeFriendIWant5 = request.getValuesTypeFriendIWant5();
-            this.valuesTypeFriendIWant6 = request.getValuesTypeFriendIWant6();
+            this.valuesTypeFriendIWant4 = request.getValuesTypeFriendIWant4() == null ? ValuesTypeFriend.NONE : request.getValuesTypeFriendIWant4();
+            this.valuesTypeFriendIWant5 = request.getValuesTypeFriendIWant5() == null ? ValuesTypeFriend.NONE : request.getValuesTypeFriendIWant5();
+            this.valuesTypeFriendIWant6 = request.getValuesTypeFriendIWant6() == null ? ValuesTypeFriend.NONE : request.getValuesTypeFriendIWant6();
             this.valuesTypeFriendYouWant1 = request.getValuesTypeFriendYouWant1();
             this.valuesTypeFriendYouWant2 = request.getValuesTypeFriendYouWant2();
             this.valuesTypeFriendYouWant3 = request.getValuesTypeFriendYouWant3();
-            this.valuesTypeFriendYouWant4 = request.getValuesTypeFriendYouWant4();
-            this.valuesTypeFriendYouWant5 = request.getValuesTypeFriendYouWant5();
-            this.valuesTypeFriendYouWant6 = request.getValuesTypeFriendYouWant6();
+            this.valuesTypeFriendYouWant4 = request.getValuesTypeFriendYouWant4() == null ? ValuesTypeFriend.NONE : request.getValuesTypeFriendYouWant4();
+            this.valuesTypeFriendYouWant5 = request.getValuesTypeFriendYouWant5() == null ? ValuesTypeFriend.NONE : request.getValuesTypeFriendYouWant5();
+            this.valuesTypeFriendYouWant6 = request.getValuesTypeFriendYouWant6() == null ? ValuesTypeFriend.NONE : request.getValuesTypeFriendYouWant6();
             this.dateCreate = LocalDateTime.now();
             this.dateUpdate = LocalDateTime.now();
         }
