@@ -20,6 +20,9 @@ public enum ResultCode {
     ,ALREADY_DUPLICATE_ID(-10004, "중복된 아이디가 존재합니다.")
 
     ,NO_MEMBER_DATA(-20000, "회원정보가 없습니다.")
+    , NICKNAME_USING(-20001, "닉네임이 사용중 입니다.")
+    , NICKNAME_OVERLAP(-20002, "동일한 닉네임으로는 변경이 불가합니다.")
+
     ;
 
 

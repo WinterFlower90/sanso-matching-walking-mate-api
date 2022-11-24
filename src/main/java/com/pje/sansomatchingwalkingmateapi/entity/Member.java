@@ -2,8 +2,10 @@ package com.pje.sansomatchingwalkingmateapi.entity;
 
 import com.pje.sansomatchingwalkingmateapi.enums.Gender;
 import com.pje.sansomatchingwalkingmateapi.enums.MemberGroup;
+import com.pje.sansomatchingwalkingmateapi.enums.Penalty;
 import com.pje.sansomatchingwalkingmateapi.interfaces.CommonModelBuilder;
 import com.pje.sansomatchingwalkingmateapi.model.member.MemberCreateRequest;
+import com.pje.sansomatchingwalkingmateapi.model.member.NickNameChangeRequest;
 import com.pje.sansomatchingwalkingmateapi.model.walkingAddress.WalkingAddressUserFavoritesRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -60,11 +62,19 @@ public class Member implements UserDetails {
     private Long walkingAddressId2; // 즐겨찾는 산책 장소2
     private Long walkingAddressId3; // 즐겨찾는 산책 장소3
 
+    @Column(nullable = false, length = 20)
+    @Enumerated(EnumType.STRING)
+    private Penalty penalty; // 패널티 (주의/경고/블랙리스트)
+
     // 회원가입 후 내가 즐겨찾는 장소 3곳 등록
     public void putMyWalkingAddressFavorites(WalkingAddressUserFavoritesRequest request) {
         this.walkingAddressId1 = request.getWalkingAddressId1();
         this.walkingAddressId2 = request.getWalkingAddressId2();
         this.walkingAddressId3 = request.getWalkingAddressId3();
+    }
+    // 닉네임 수정
+    public void putNickName(NickNameChangeRequest request) {
+        this.nickName = request.getNickName();
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -102,6 +112,7 @@ public class Member implements UserDetails {
         this.isPet = builder.isPet;
         this.dateJoin = builder.dateJoin;
         this.dateUpdate = builder.dateUpdate;
+        this.penalty = builder.penalty;
     }
     public static class MemberBuilder implements CommonModelBuilder<Member> {
         private final String username; // 아이디
@@ -116,6 +127,7 @@ public class Member implements UserDetails {
         private final Boolean isPet; // 펫 유/무
         private final LocalDateTime dateJoin; // 가입시간
         private final LocalDateTime dateUpdate; // 수정시간
+        private final Penalty penalty;
 
         // 빌더에서 회원그룹 따로 받는 이유 : 일반유저가 회원가입시 내가 일반유저다 라고 선택하지 않음.
         // 회원등록은 관리자페이지에서 관리자가 하거나 일반유저가 회원가입하거나.. N개의 경우의 수가 존재함.
@@ -129,9 +141,10 @@ public class Member implements UserDetails {
             this.birthDay = createRequest.getBirthDay();
             this.phone = createRequest.getPhone();
             this.isEnabled = true;
-            this.isPet = createRequest.getIsPet();
+            this.isPet = false;
             this.dateJoin = getNowTime();
             this.dateUpdate = getNowTime();
+            this.penalty = Penalty.NONE;
         }
 
         @Override

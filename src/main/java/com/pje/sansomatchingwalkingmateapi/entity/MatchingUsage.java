@@ -2,7 +2,6 @@ package com.pje.sansomatchingwalkingmateapi.entity;
 
 import com.pje.sansomatchingwalkingmateapi.enums.MatchingStatus;
 import com.pje.sansomatchingwalkingmateapi.interfaces.CommonModelBuilder;
-import com.pje.sansomatchingwalkingmateapi.model.matchingUsage.MatchingCreateRequest;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -36,16 +35,14 @@ public class MatchingUsage {
     @Enumerated(value = EnumType.STRING)
     private MatchingStatus matchingStatus;
 
-    @ApiModelProperty(notes = "매칭 신청 메세지")
-    @Column(nullable = false, length = 20)
-    private String applyMessage;
+    @ApiModelProperty(notes = "수락 메세지")
+    @Column(length = 20)
+    private String acceptMessage;
 
     @ApiModelProperty(notes = "신청한 회원 별점")
-    @Column(nullable = true)
     private Float applyStarRating;
 
     @ApiModelProperty(notes = "신청받은 회원 별점")
-    @Column(nullable = true)
     private Float receiveStarRating;
 
     @ApiModelProperty(notes = "신청 기준일")
@@ -57,26 +54,27 @@ public class MatchingUsage {
     private LocalTime dateApply;
 
     @ApiModelProperty(notes = "신청 시간")
-    @Column(nullable = true)
     private LocalTime dateMatching;
 
     @ApiModelProperty(notes = "약속 시간")
-    @Column(nullable = true)
     private LocalTime datePromise;
 
     @ApiModelProperty(notes = "거절 시간")
-    @Column(nullable = true)
     private LocalTime dateRefuse;
 
     @ApiModelProperty(notes = "수정시간")
     @Column(nullable = false)
     private LocalDateTime dateUpdate;
 
+    @ApiModelProperty(notes = "산책지 받아오기위해 join")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "walkingAddressId", nullable = false)
+    private WalkingAddress walkingAddress;
+
     private MatchingUsage(MatchingUsageCreateBuilder builder) {
         this.applyMemberId = builder.applyMemberId;
         this.receiveMemberId = builder.receiveMemberId;
         this.matchingStatus = builder.matchingStatus;
-        this.applyMessage = builder.applyMessage;
         this.dateBase = builder.dateBase;
         this.dateApply = builder.dateApply;
         this.dateUpdate = builder.dateUpdate;
@@ -86,16 +84,14 @@ public class MatchingUsage {
         private final Long applyMemberId;
         private final Long receiveMemberId;
         private final MatchingStatus matchingStatus;
-        private final String applyMessage;
         private final LocalDate dateBase;
         private final LocalTime dateApply;
         private final LocalDateTime dateUpdate;
 
-        public MatchingUsageCreateBuilder(Member member, MatchingCreateRequest request) {
+        public MatchingUsageCreateBuilder(Member member, long receiveMemberId) {
             this.applyMemberId = member.getId();
-            this.receiveMemberId = member.getId();
+            this.receiveMemberId = receiveMemberId;
             this.matchingStatus = MatchingStatus.STAND_BY;
-            this.applyMessage = request.getApplyMessage();
             this.dateBase = getNowDate();
             this.dateApply = getNowOnlyTime();
             this.dateUpdate = getNowTime();

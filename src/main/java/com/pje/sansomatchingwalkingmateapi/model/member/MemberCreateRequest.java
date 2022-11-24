@@ -33,8 +33,7 @@ public class MemberCreateRequest {
     @ApiModelProperty(notes = "프로필 이미지")
     private String memberProfileImage;
 
-    @ApiModelProperty(value = "별명 (2~20자)", required = true)
-    @NotNull
+    @ApiModelProperty(value = "별명 (2~20자)")
     @Length(min = 2, max = 20)
     private String nickName;
 
@@ -51,24 +50,6 @@ public class MemberCreateRequest {
     @NotNull
     @Length(min = 12, max = 20)
     private String phone;
-
-    @ApiModelProperty(value = "회원 유/무", required = true)
-    @NotNull
-    private Boolean isEnabled;
-
-    @ApiModelProperty(value = "회원 유/무", required = true)
-    @NotNull
-    private Boolean isPet;
-
-    @ApiModelProperty(value = "가입시간", required = true)
-    @NotNull
-    private LocalDateTime dateJoin;
-
-    @ApiModelProperty(value = "수정시간", required = true)
-    @NotNull
-    private LocalDateTime dateUpdate;
-
-    @ApiModelProperty(value = "탈퇴시간")
-    private LocalDateTime dateWithdraw;
 }
+
 

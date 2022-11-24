@@ -4,10 +4,12 @@ import com.pje.sansomatchingwalkingmateapi.entity.Member;
 import com.pje.sansomatchingwalkingmateapi.model.common.CommonResult;
 import com.pje.sansomatchingwalkingmateapi.model.common.ListResult;
 import com.pje.sansomatchingwalkingmateapi.model.walkingAddress.WalkingAddressAdminRequest;
+import com.pje.sansomatchingwalkingmateapi.model.walkingAddress.WalkingAddressAdminResponse;
 import com.pje.sansomatchingwalkingmateapi.model.walkingAddress.WalkingAddressUserFavoritesRequest;
 import com.pje.sansomatchingwalkingmateapi.model.walkingAddress.WalkingAddressUserFavoritesResponse;
 import com.pje.sansomatchingwalkingmateapi.service.MemberDataService;
 import com.pje.sansomatchingwalkingmateapi.service.WalkingAddressService;
+import com.pje.sansomatchingwalkingmateapi.service.common.ProfileService;
 import com.pje.sansomatchingwalkingmateapi.service.common.ResponseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -24,7 +26,7 @@ import javax.validation.Valid;
 @RequestMapping("/v1/walking-address")
 public class WalkingAddressController {
     private final WalkingAddressService walkingAddressService;
-    private final MemberDataService memberDataService;
+    private final ProfileService profileService;
 
     @ApiOperation(value = "[관리자] 산책장소 등록")
     @PostMapping("/new")
@@ -33,7 +35,7 @@ public class WalkingAddressController {
         return ResponseService.getSuccessResult();
     }
 
-    @ApiOperation(value = "[관리자/일반유저] 산책장소 전체 리스트")
+    @ApiOperation(value = "[관리자/일반유저] 산책장소 전체 리스트 조회")
     @GetMapping("/data")
     public ListResult<WalkingAddressUserFavoritesResponse> getWalkingAddresses() {
         return ResponseService.getListResult(walkingAddressService.getWalkingAddresses(),true);
@@ -49,24 +51,19 @@ public class WalkingAddressController {
         return ResponseService.getSuccessResult();
     }
 
-    @ApiOperation(value = "[일반유저] 나의 즐겨찾기 장소 등록")
-    @ApiImplicitParams(
-            @ApiImplicitParam(name = "memberId", value = "회원 시퀀스", required = true)
-    )
-    @PutMapping("/favorites-new/{memberId}")
-    public CommonResult putMyWalkingAddressFavorites(@PathVariable long memberId, @RequestBody @Valid WalkingAddressUserFavoritesRequest request) {
-        Member member = memberDataService.getMember(memberId);
+    @ApiOperation(value = "[일반유저] 나의 즐겨찾기 장소 등록/수정")
+    @PutMapping("/favorites-new")
+    public CommonResult putMyWalkingAddressFavorites(@RequestBody @Valid WalkingAddressUserFavoritesRequest request) {
+        Member member = profileService.getMemberData();
         walkingAddressService.putMyWalkingAddressFavorites(member, request);
         return ResponseService.getSuccessResult();
     }
 
-//    @ApiOperation(value = "[일반유저] 나의 즐겨찾기 장소 리스트")
-//    @ApiImplicitParams(
-//            @ApiImplicitParam(name = "memberId", value = "회원 시퀀스", required = true)
-//    )
-//    @GetMapping("/favorites-data/{memberId}")
-//    public ListResult<WalkingAddressResponse> getMyWalkingAddressFavorites(@PathVariable long memberId) {
-//        Member member = memberDataService.getMember(memberId);
-//        return ResponseService.getListResult(walkingAddressService.getMyWalkingAddressFavorites(member),true);
-//    }
+    @ApiOperation(value = "[일반유저] 나의 즐겨찾기 장소 리스트 조회")
+    @GetMapping("/favorites-data")
+    public ListResult<WalkingAddressAdminResponse> getMyWalkingAddressFavorites() {
+        Member member = profileService.getMemberData();
+        return ResponseService.getListResult(walkingAddressService.getMyWalkingAddressFavorites(member),true);
+    }
+
 }

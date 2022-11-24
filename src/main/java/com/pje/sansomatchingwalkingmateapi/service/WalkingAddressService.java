@@ -5,6 +5,7 @@ import com.pje.sansomatchingwalkingmateapi.entity.WalkingAddress;
 import com.pje.sansomatchingwalkingmateapi.exception.CMissingDataException;
 import com.pje.sansomatchingwalkingmateapi.model.common.ListResult;
 import com.pje.sansomatchingwalkingmateapi.model.walkingAddress.WalkingAddressAdminRequest;
+import com.pje.sansomatchingwalkingmateapi.model.walkingAddress.WalkingAddressAdminResponse;
 import com.pje.sansomatchingwalkingmateapi.model.walkingAddress.WalkingAddressUserFavoritesRequest;
 import com.pje.sansomatchingwalkingmateapi.model.walkingAddress.WalkingAddressUserFavoritesResponse;
 import com.pje.sansomatchingwalkingmateapi.repository.MemberRepository;
@@ -71,26 +72,30 @@ public class WalkingAddressService {
         memberRepository.save(member);
     }
 
-    //todo 나의 즐찾 장소리스트 쿼리 해결
-
     /**
-     * [일반유저] 나의 즐겨찾는 장소 리스트 가져오는 메서드
+     * [일반유저] 나의 즐겨찾는 장소 조회 메서드
      * @param member 회원 시퀀스
      * @return 즐겨찾기 장소 3곳 리스트
      */
-//    public ListResult<WalkingAddressResponse> getMyWalkingAddressFavorites(Member member) {
-//        List<WalkingAddress> walkingAddresses = walkingAddressRepository.findAllById(member.getWalkingAddressId1(), member.getWalkingAddressId2(), member.getWalkingAddressId3());
-//
-//        List<WalkingAddressResponse> result = new LinkedList<>();
-//
-//        walkingAddresses.forEach(walkingAddress -> {
-//            WalkingAddressResponse addressItem = new WalkingAddressResponse.WalkingAddressResponseBuilder(walkingAddress).build();
-//
-//            result.add(addressItem);
-//        });
-//
-//        return ListConvertService.settingResult(result);
-//    }
+    public ListResult<WalkingAddressAdminResponse> getMyWalkingAddressFavorites(Member member) {
+        List<WalkingAddress> walkingAddresses = walkingAddressRepository
+                .findAllByIdEqualsOrIdEqualsOrId(
+                        member.getWalkingAddressId1(),
+                        member.getWalkingAddressId2(),
+                        member.getWalkingAddressId3()
+                );
+
+        List<WalkingAddressAdminResponse> result = new LinkedList<>();
+
+        walkingAddresses.forEach(walkingAddress -> {
+            WalkingAddressAdminResponse addressItem = new WalkingAddressAdminResponse.WalkingAddressResponseBuilder(walkingAddress).build();
+
+            result.add(addressItem);
+        });
+
+        return ListConvertService.settingResult(result);
+    }
+
 
     //todo 나의 즐찾 수정 만들기(즐겨찾기 변경용)
 }

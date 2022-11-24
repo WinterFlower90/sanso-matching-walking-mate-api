@@ -1,4 +1,5 @@
-package com.pje.sansomatchingwalkingmateapi.model.matchingUsage;
+package com.pje.sansomatchingwalkingmateapi.model.member;
+
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -7,12 +8,15 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * [일반유저] 닉네임 변경 모델
+ */
 @Getter
 @Setter
-public class MatchingCreateRequest {
-
-    @ApiModelProperty(notes = "매칭 신청 메세지(2-20글자)")
+public class NickNameChangeRequest {
+    @ApiModelProperty(value = "별명 (2~20자)", required = true)
     @NotNull
     @Length(min = 2, max = 20)
-    private String applyMessage;
+    private String nickName;
 }
+

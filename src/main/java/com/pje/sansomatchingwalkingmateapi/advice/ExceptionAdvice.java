@@ -73,5 +73,17 @@ public class ExceptionAdvice {
         return ResponseService.getFailResult(ResultCode.WRONG_USERNAME_TYPE);
     }
 
+    @ExceptionHandler(CNickNameUsingException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected CommonResult customException(HttpServletRequest request, CNickNameUsingException e) {
+        return ResponseService.getFailResult(ResultCode.NICKNAME_USING);
+    }
+
+    @ExceptionHandler(CNickNameOverlapException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected CommonResult customException(HttpServletRequest request, CNickNameOverlapException e) {
+        return ResponseService.getFailResult(ResultCode.NICKNAME_OVERLAP);
+    }
+
 }
 
