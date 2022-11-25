@@ -82,12 +82,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .antMatchers("/v1/walking-address/data").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 산책 리스트(R)
                         .antMatchers("/v1/walking-address/data/**").hasAnyRole("ADMIN") // [관리자] 산책 장소 수정(U)
                         .antMatchers("/v1/walking-address/favorites-new/**").hasAnyRole("USER") // [일반유저] 나의 즐겨찾기 장소 등록(C)
+                        .antMatchers("/v1/walking-address/favorites-data").hasAnyRole("USER") // [일반유저] 나의 즐겨찾기 장소 리스트 조회(R)
+                        .antMatchers("/v1/walking-address/favorites-data/**").hasAnyRole("USER") // [일반유저] 나의 즐겨찾기 장소의 회원 조회(R)
+                // 회원
+                        .antMatchers("/v1/member/join").permitAll() // [관리자/일반유저] 회원 등록(C)
+                        .antMatchers("/v1/member/nickname").hasAnyRole("USER") // [일반유저] 닉네임 조회(R)
+                        .antMatchers("/v1/member/nickname-change").hasAnyRole("USER") // [일반유저] 닉네임 수정(U)
+                        .antMatchers("/v1/member/information/**").hasAnyRole("ADMIN") // [관리자] 회원정보 리스트 조회(R)
                 // 펫
                         .antMatchers("/v1/pet/new").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 펫 등록(C)
                         .antMatchers("/v1/pet/all").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 펫 목록 조회(R)
                         .antMatchers("/v1/pet/one/pet-id/**").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 각 펫의 정보 (한마리씩) 조회(R)
                         .antMatchers("/v1/pet/put-pet-name/pet-id/**").hasAnyRole("ADMIN", "USER") //[관리자/일반유저] 각 펫의 이름 수정(U)
                         .antMatchers("/v1/pet/put-pet-info/pet-id/**").hasAnyRole("ADMIN", "USER") //[관리자/일반유저] 각 펫의 정보 수정(U)
+                // 매칭내역
+                        .antMatchers("/v1/matching-usage/new").hasAnyRole("USER") // [일반유저] 매칭 신청(C)
                         .anyRequest().hasRole("ADMIN") // 기본 접근 권한은 ROLE_ADMIN
                 //고쳐서 사용하는 부분 끝
                 .and()

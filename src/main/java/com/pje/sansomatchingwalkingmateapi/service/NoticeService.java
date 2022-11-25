@@ -10,6 +10,7 @@ import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeSearchRequest;
 import com.pje.sansomatchingwalkingmateapi.repository.NoticeRepository;
 import com.pje.sansomatchingwalkingmateapi.service.common.ListConvertService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -70,7 +71,7 @@ public class NoticeService {
         int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         LocalDate dateEnd = LocalDate.of(noticeSearchRequest.getDateYear(), noticeSearchRequest.getDateMonth(), maxDay);
 
-        List<Notice> notices = noticeRepository.findAllByNoticeIsEnableAndDatePostGreaterThanEqualAndDatePostLessThanEqualOrderByIdDesc(true, dateStart, dateEnd);
+        Page<Notice> notices = noticeRepository.findAllByNoticeIsEnableAndDatePostGreaterThanEqualAndDatePostLessThanEqualOrderByIdDesc(true, dateStart, dateEnd, pageRequest);
         List<NoticeListItem> result = new LinkedList<>();
 
         notices.forEach(notice -> {
@@ -78,7 +79,7 @@ public class NoticeService {
             result.add(addItem);
         });
 
-        return ListConvertService.settingResult(result);
+        return ListConvertService.settingResult(result, notices.getTotalElements(), notices.getTotalPages(), notices.getPageable().getPageNumber());
     }
 
     /** 공지사항 전체리스트 가져오기
