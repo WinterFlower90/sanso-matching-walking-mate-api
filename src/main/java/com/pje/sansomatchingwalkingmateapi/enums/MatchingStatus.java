@@ -6,10 +6,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum MatchingStatus {
-    STAND_BY ("매칭대기중"),
-    MATCHING_DONE_NO_MEET ("매칭완료 : 만나기전"),
-    MATCHING_DONE_MEET ("매칭완료 : 만남"),
-    REFUSAL ("매칭거절"),
+    WAIT ("대기중"),
+    MATCHING_BEFORE_REAL_MEETING ("매칭 : 만나기전"),
+    MATCHING_AFTER_REAL_MEETING ("매칭 : 만남"),
+    NO_MEETING ("거절"),
 
     ;
     private final String name;

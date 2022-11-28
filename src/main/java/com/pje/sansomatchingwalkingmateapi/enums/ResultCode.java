@@ -23,6 +23,7 @@ public enum ResultCode {
     , NICKNAME_USING(-20001, "닉네임이 사용중 입니다.")
     , NICKNAME_OVERLAP(-20002, "동일한 닉네임으로는 변경이 불가합니다.")
 
+    , APPLY_MEMBER_OVERLAP(-30001, "자신에게는 신청 할 수 없습니다.")
     ;
 
 

@@ -3,6 +3,7 @@ package com.pje.sansomatchingwalkingmateapi.entity;
 
 import com.pje.sansomatchingwalkingmateapi.interfaces.CommonModelBuilder;
 import com.pje.sansomatchingwalkingmateapi.model.walkingAddress.WalkingAddressAdminRequest;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,17 +17,28 @@ import static com.pje.sansomatchingwalkingmateapi.lib.CommonDate.getNowTime;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class WalkingAddress {
+    @ApiModelProperty(value = "시퀀스")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 시퀀스
+
+    @ApiModelProperty(value = "산책 장소")
     @Column(nullable = false, length = 20)
     private String walkingAddressName; // 산책 장소
+
+    @ApiModelProperty(value = "위도")
     @Column(nullable = false)
     private Double latitude; // 위도
+
+    @ApiModelProperty(value = "경도")
     @Column(nullable = false)
     private Double longitude; // 경도
+
+    @ApiModelProperty(value = "등록시간")
     @Column(nullable = false)
     private LocalDateTime dateCreate; // 등록시간
+
+    @ApiModelProperty(value = "수정시간")
     @Column(nullable = false)
     private LocalDateTime dateUpdate; // 수정시간
 

@@ -34,6 +34,16 @@ public class WalkingAddressService {
     }
 
     /**
+     *[일반유저] 신청한 산책장소 정보 가져오기
+     * @param walkingAddressId 신청한 산책장소 시퀀스
+     * @return 신청한 산책장소 정보
+     */
+    public WalkingAddress getWalkingAddress(long walkingAddressId) {
+        return walkingAddressRepository.findById(walkingAddressId).orElseThrow(CMissingDataException::new);
+    }
+
+
+    /**
      * [일반유저] 전체 산책장소 리스트 메서드 (즐겨찾기 고르는 용도)
      * @return 산책 장소 리스트
      */

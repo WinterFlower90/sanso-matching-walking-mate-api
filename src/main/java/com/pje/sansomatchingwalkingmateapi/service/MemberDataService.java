@@ -107,7 +107,7 @@ public class MemberDataService {
      * @param member 회원 정보
      * @return 회원 닉네임
      */
-    public NickNameResponse getNickName(Member member) {
+    public NickNameResponse getMyNickName(Member member) {
         return new NickNameResponse.NickNameResponseBuilder(member).build();
     }
 
@@ -116,7 +116,7 @@ public class MemberDataService {
      * @param member 회원 정보
      * @param request 변경할 닉네임
      */
-    public void putNickName(Member member, NickNameChangeRequest request) {
+    public void putMyNickName(Member member, NickNameChangeRequest request) {
         // 회원 테이블에서 요청한 닉네임을 찾고
         Optional<Member> nickNameVerify = memberRepository.findAllByNickName(request.getNickName());
 
@@ -195,9 +195,9 @@ public class MemberDataService {
     }
 
     /**
-     * 회원정보 가져오기
-     * @param memberId 회원 시퀀스
-     * @return 해당 회원정보
+     * [일반유저] 신청받은 회원정보 가져오기
+     * @param memberId 신청받은 회원 시퀀스
+     * @return 신청받은 해당 회원정보
      */
     public Member getMember(long memberId) {
         return memberRepository.findById(memberId).orElseThrow(CMissingDataException::new);

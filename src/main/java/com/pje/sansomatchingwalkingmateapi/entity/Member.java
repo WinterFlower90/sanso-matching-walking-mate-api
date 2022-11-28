@@ -7,6 +7,7 @@ import com.pje.sansomatchingwalkingmateapi.interfaces.CommonModelBuilder;
 import com.pje.sansomatchingwalkingmateapi.model.member.MemberCreateRequest;
 import com.pje.sansomatchingwalkingmateapi.model.member.NickNameChangeRequest;
 import com.pje.sansomatchingwalkingmateapi.model.walkingAddress.WalkingAddressUserFavoritesRequest;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,42 +27,76 @@ import static com.pje.sansomatchingwalkingmateapi.lib.CommonDate.getNowTime;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member implements UserDetails {
+    @ApiModelProperty(value = "시퀀스")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 시퀀스
+
+    @ApiModelProperty(value = "아이디")
     @Column(nullable = false, unique = true, length = 30)
     private String username; // 아이디
+
+    @ApiModelProperty(value = "비밀번호")
     @Column(nullable = false)
     private String password; // 비밀번호
+
+    @ApiModelProperty(value = "프로필 이미지")
     private String memberProfileImage; // 프로필 이미지
+
+    @ApiModelProperty(value = "닉네임")
     @Column(length = 20)
     private String nickName; // 닉네임
+
+    @ApiModelProperty(value = "성별")
     @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
     private Gender gender; // 성별
+
+    @ApiModelProperty(value = "생년월일")
     @Column(nullable = false)
     private LocalDate birthDay; // 생년월일
+
+    @ApiModelProperty(value = "연락처")
     @Column(nullable = false, unique = true, length = 20)
     private String phone; // 연락처
+
+    @ApiModelProperty(value = "권한 설정")
     @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
     private MemberGroup memberGroup; // 권한 설정
+
+    @ApiModelProperty(value = "유효 회원 유/무")
     @Column(nullable = false)
     private Boolean isEnabled; // 회원 유/무
+
+    @ApiModelProperty(value = "펫 유/무")
     @Column(nullable = false)
     private Boolean isPet; // 펫 유/무
+
+    @ApiModelProperty(value = "가입 시간")
     @Column(nullable = false)
     private LocalDateTime dateJoin; // 가입시간
+
+    @ApiModelProperty(value = "수정시간")
     @Column(nullable = false)
     private LocalDateTime dateUpdate; // 수정시간
 
+    @ApiModelProperty(value = "탈퇴시간")
     private LocalDateTime dateWithdraw; // 탈퇴시간
 
+    @ApiModelProperty(value = "평점")
     private Float avgStarRating; // 평점
+
+    @ApiModelProperty(value = "즐겨찾는 산책장소 1")
     private Long walkingAddressId1; // 즐겨찾는 산책 장소1
+
+    @ApiModelProperty(value = "즐겨찾는 산책장소 2")
     private Long walkingAddressId2; // 즐겨찾는 산책 장소2
+
+    @ApiModelProperty(value = "즐겨찾는 산책장소 3")
     private Long walkingAddressId3; // 즐겨찾는 산책 장소3
 
+    @ApiModelProperty(value = "패널티 (주의/경고/블랙리스트)")
     @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
     private Penalty penalty; // 패널티 (주의/경고/블랙리스트)

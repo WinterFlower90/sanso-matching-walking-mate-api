@@ -85,5 +85,11 @@ public class ExceptionAdvice {
         return ResponseService.getFailResult(ResultCode.NICKNAME_OVERLAP);
     }
 
+    @ExceptionHandler(CApplyMemberOverlapException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected CommonResult customException(HttpServletRequest request, CApplyMemberOverlapException e) {
+        return ResponseService.getFailResult(ResultCode.APPLY_MEMBER_OVERLAP);
+    }
+
 }
 
