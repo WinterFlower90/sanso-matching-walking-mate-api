@@ -6,10 +6,7 @@ import com.pje.sansomatchingwalkingmateapi.enums.MemberInformationType;
 import com.pje.sansomatchingwalkingmateapi.model.common.CommonResult;
 import com.pje.sansomatchingwalkingmateapi.model.common.ListResult;
 import com.pje.sansomatchingwalkingmateapi.model.common.SingleResult;
-import com.pje.sansomatchingwalkingmateapi.model.member.MemberCreateRequest;
-import com.pje.sansomatchingwalkingmateapi.model.member.MemberInformationResponse;
-import com.pje.sansomatchingwalkingmateapi.model.member.NickNameChangeRequest;
-import com.pje.sansomatchingwalkingmateapi.model.member.NickNameResponse;
+import com.pje.sansomatchingwalkingmateapi.model.member.*;
 import com.pje.sansomatchingwalkingmateapi.service.MemberDataService;
 import com.pje.sansomatchingwalkingmateapi.service.common.ProfileService;
 import com.pje.sansomatchingwalkingmateapi.service.common.ResponseService;
@@ -39,15 +36,15 @@ public class MemberController {
 
     @ApiOperation(value = "[일반유저] 닉네임 조회")
     @GetMapping("/nickname")
-    public SingleResult<NickNameResponse> getNickName() {
+    public SingleResult<NickNameResponse> getMyNickName() {
         Member member = profileService.getMemberData();
-        return ResponseService.getSingleResult(memberDataService.getNickName(member));
+        return ResponseService.getSingleResult(memberDataService.getMyNickName(member));
     }
     @ApiOperation(value = "[일반유저] 닉네임 수정")
     @PutMapping("/nickname-change")
-    public CommonResult putNickName(@RequestBody @Valid NickNameChangeRequest Request) {
+    public CommonResult putMyNickName(@RequestBody @Valid NickNameChangeRequest Request) {
         Member member= profileService.getMemberData();
-        memberDataService.putNickName(member, Request);
+        memberDataService.putMyNickName(member, Request);
         return ResponseService.getSuccessResult();
     }
 
@@ -73,4 +70,9 @@ public class MemberController {
         }
     }
 
+    @ApiOperation(value = "나의 프로필 정보 가져오기")
+    @GetMapping("/my-profile")
+    public SingleResult<ProfileResponse> getMyProfile() {
+        return ResponseService.getSingleResult(profileService.getProfile());
+    }
 }

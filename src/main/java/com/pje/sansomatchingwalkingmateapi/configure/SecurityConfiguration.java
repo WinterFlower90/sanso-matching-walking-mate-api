@@ -89,6 +89,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .antMatchers("/v1/member/nickname").hasAnyRole("USER") // [일반유저] 닉네임 조회(R)
                         .antMatchers("/v1/member/nickname-change").hasAnyRole("USER") // [일반유저] 닉네임 수정(U)
                         .antMatchers("/v1/member/information/**").hasAnyRole("ADMIN") // [관리자] 회원정보 리스트 조회(R)
+                        .antMatchers("/v1/member/my-profile").hasAnyRole("ADMIN", "USER") //[관리자/일반유저] 나의 프로필정보 조회(R)
                 // 펫
                         .antMatchers("/v1/pet/new").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 펫 등록(C)
                         .antMatchers("/v1/pet/all").hasAnyRole("ADMIN", "USER") // [관리자/일반유저] 펫 목록 조회(R)
