@@ -2,9 +2,11 @@ package com.pje.sansomatchingwalkingmateapi.service;
 
 import com.pje.sansomatchingwalkingmateapi.entity.Member;
 import com.pje.sansomatchingwalkingmateapi.entity.Notice;
+import com.pje.sansomatchingwalkingmateapi.enums.NoticeIsEnable;
 import com.pje.sansomatchingwalkingmateapi.exception.CMissingDataException;
 import com.pje.sansomatchingwalkingmateapi.model.common.ListResult;
 import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeCreateRequest;
+import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeListHaveNoteItem;
 import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeListItem;
 import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeSearchRequest;
 import com.pje.sansomatchingwalkingmateapi.repository.NoticeRepository;
@@ -47,14 +49,18 @@ public class NoticeService {
         noticeRepository.save(notice);
     }
 
-    /** 공지사항 게시 해제
+    /**
+     * 공지사항 공지 or 해제
      * @param id 공지사항 시퀀스
+     * @param noticeIsEnable 공지 or 해제
      */
-    public void putNoticeEnable(long id) {
+
+    public void putNoticeEnable(long id, NoticeIsEnable noticeIsEnable)  {
         Notice notice = noticeRepository.findById(id).orElseThrow(CMissingDataException::new);
-        notice.putNoticeEnable();
+        notice.putNoticeEnable(noticeIsEnable);
         noticeRepository.save(notice);
     }
+
 
     /** 공지사항 리스트 가져오기
      * 유효한 게시물 + 기간필터를 이용
@@ -97,5 +103,88 @@ public class NoticeService {
 
         return ListConvertService.settingResult(result);
     }
+
+    public NoticeListHaveNoteItem getNoticeOne(long noticeId) {
+        Notice notice = noticeRepository.findById(noticeId).orElseThrow(CMissingDataException::new);
+        return new NoticeListHaveNoteItem.NoticeListHaveNoteItemBuilder(notice).build();
+    }
+
+    /** 공지사항 전체리스트(내용 포함) 가져오기
+     *
+     * @return 전체 항목 리스트 반환
+     */
+    public ListResult<NoticeListHaveNoteItem> getNoticeNoteList() {
+        List<Notice> notices = noticeRepository.findAll();
+        List<NoticeListHaveNoteItem> result = new LinkedList<>();
+
+        notices.forEach(notice -> {
+            NoticeListHaveNoteItem addItem = new NoticeListHaveNoteItem.NoticeListHaveNoteItemBuilder(notice).build();
+            result.add(addItem);
+        });
+
+        return ListConvertService.settingResult(result);
+    }
+
+
+
+    /**
+     * [관리자]  페이지 + 기간별 + 제목 검색 + 공지중/해제중
+     * (메서드 오버로딩 사용)
+     * @param pageNum 페이지 번호
+     * @param dateYear 조회 연도
+     * @param dateMonth 조회 달
+     * @param searchTitle 제목 검색
+     * @param noticeIsEnable 공지중/해제중
+     * @return 공지사항 정보
+     */
+    public ListResult<NoticeListItem> getSearchNoticeList(int pageNum, int dateYear, int dateMonth, String searchTitle, NoticeIsEnable noticeIsEnable) {
+        PageRequest pageRequest = ListConvertService.getPageable(pageNum, 10);
+
+        LocalDate dateStart = LocalDate.of(dateYear, dateMonth, 1);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(dateYear, dateMonth - 1, 1);
+        int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        LocalDate dateEnd = LocalDate.of(dateYear, dateMonth, maxDay);
+
+        Page<Notice> notices = noticeRepository.findAllByTitleContainingIgnoreCaseAndNoticeIsEnableAndDatePostGreaterThanEqualAndDatePostLessThanEqualOrderByIdDesc(searchTitle, noticeIsEnable.getType(), dateStart, dateEnd, pageRequest);
+        List<NoticeListItem> result = new LinkedList<>();
+
+        notices.forEach(notice -> {
+            NoticeListItem addItem = new NoticeListItem.NoticeListItemBuilder(notice).build();
+            result.add(addItem);
+        });
+
+        return ListConvertService.settingResult(result, notices.getTotalElements(), notices.getTotalPages(), notices.getPageable().getPageNumber());
+    }
+
+    /**
+     * [관리자]  페이지 + 기간별 + 제목 검색
+     * (메서드 오버로딩 사용)
+     * @param pageNum 페이지 번호
+     * @param dateYear 조회 연도
+     * @param dateMonth 조회 달
+     * @param searchTitle 제목 검색
+     * @return 공지사항 정보
+     */
+    public ListResult<NoticeListItem> getSearchNoticeList(int pageNum, int dateYear, int dateMonth, String searchTitle) {
+        PageRequest pageRequest = ListConvertService.getPageable(pageNum, 10);
+
+        LocalDate dateStart = LocalDate.of(dateYear, dateMonth, 1);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(dateYear, dateMonth - 1, 1);
+        int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        LocalDate dateEnd = LocalDate.of(dateYear, dateMonth, maxDay);
+
+        Page<Notice> notices = noticeRepository.findAllByTitleContainingIgnoreCaseAndDatePostGreaterThanEqualAndDatePostLessThanEqualOrderByNoticeIsEnableDescIdDesc(searchTitle, dateStart, dateEnd, pageRequest);
+        List<NoticeListItem> result = new LinkedList<>();
+
+        notices.forEach(notice -> {
+            NoticeListItem addItem = new NoticeListItem.NoticeListItemBuilder(notice).build();
+            result.add(addItem);
+        });
+
+        return ListConvertService.settingResult(result, notices.getTotalElements(), notices.getTotalPages(), notices.getPageable().getPageNumber());
+    }
+
 
 }

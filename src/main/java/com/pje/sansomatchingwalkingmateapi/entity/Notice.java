@@ -1,5 +1,6 @@
 package com.pje.sansomatchingwalkingmateapi.entity;
 
+import com.pje.sansomatchingwalkingmateapi.enums.NoticeIsEnable;
 import com.pje.sansomatchingwalkingmateapi.interfaces.CommonModelBuilder;
 import com.pje.sansomatchingwalkingmateapi.model.notice.NoticeCreateRequest;
 import io.swagger.annotations.ApiModelProperty;
@@ -36,9 +37,10 @@ public class Notice {
     @Column(nullable = false, length = 20)
     private String writer;
 
-    @ApiModelProperty(notes = "공지 유무")
+
+    @ApiModelProperty(notes = "공지 유/무")
     @Column(nullable = false) //기본값 true. 공지에서 내리고 싶을때 false
-    private boolean noticeIsEnable;
+    private Boolean noticeIsEnable;
 
     @ApiModelProperty(notes = "게시 날짜")
     @Column(nullable = false)
@@ -70,14 +72,28 @@ public class Notice {
         this.dateUpdate = LocalDateTime.now();
     }
 
+    //공지사항 공지/해제 하기
+    public void putNoticeEnable(NoticeIsEnable noticeIsEnable) {
+        switch (noticeIsEnable) {
+            case NOTICE_ENABLE:
+                this.noticeIsEnable = true;
+                this.dateUpdate = LocalDateTime.now();
+                break;
+            case NOTICE_DISABLE:
+                this.noticeIsEnable = false;
+                this.dateUpdate = LocalDateTime.now();
+                break;
+        }
+    }
+
     //공지사항 수정
     public void putNotice(NoticeCreateRequest request) {
         this.title = request.getTitle();
         this.note = request.getNote();
         this.noticeIsEnable = true;
         this.dateUpdate = LocalDateTime.now();
-        this.uploadFile = request.getUploadFile();
-        this.fileName = request.getFileName();
+//        this.uploadFile = request.getUploadFile();
+//        this.fileName = request.getFileName();
         this.dateUpload = dateUpload;
 
         if (uploadFile != null) {
@@ -96,8 +112,8 @@ public class Notice {
         this.datePost = builder.datePost;
         this.dateCreate = builder.dateCreate;
         this.dateUpdate = builder.dateUpdate;
-        this.uploadFile = builder.uploadFile;
-        this.fileName = builder.fileName;
+//        this.uploadFile = builder.uploadFile;
+//        this.fileName = builder.fileName;
         this.dateUpload = builder.dateUpload;
     }
 
@@ -110,8 +126,8 @@ public class Notice {
         private final LocalDate datePost;
         private final LocalDateTime dateCreate;
         private final LocalDateTime dateUpdate;
-        private String uploadFile;
-        private String fileName;
+        //        private String uploadFile;
+//        private String fileName;
         private LocalDateTime dateUpload;
 
 
@@ -124,15 +140,15 @@ public class Notice {
             this.datePost = LocalDate.now();
             this.dateCreate = LocalDateTime.now();
             this.dateUpdate = LocalDateTime.now();
-            this.uploadFile = request.getUploadFile();
-            this.fileName = request.getFileName();
+//            this.uploadFile = request.getUploadFile();
+//            this.fileName = request.getFileName();
             this.dateUpload = dateUpload;
 
-            if (uploadFile != null) {
-                this.dateUpload = LocalDateTime.now();
-            } else {
-                this.dateUpload = null;
-            }
+//            if (uploadFile != null) {
+//                this.dateUpload = LocalDateTime.now();
+//            } else {
+//                this.dateUpload = null;
+//            }
         }
 
         @Override

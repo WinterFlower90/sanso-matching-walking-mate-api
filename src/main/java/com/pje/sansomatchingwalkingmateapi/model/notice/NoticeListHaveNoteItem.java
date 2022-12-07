@@ -1,6 +1,5 @@
 package com.pje.sansomatchingwalkingmateapi.model.notice;
 
-import com.pje.sansomatchingwalkingmateapi.entity.Member;
 import com.pje.sansomatchingwalkingmateapi.entity.Notice;
 import com.pje.sansomatchingwalkingmateapi.interfaces.CommonModelBuilder;
 import lombok.AccessLevel;
@@ -8,48 +7,42 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class NoticeListItem {
+public class NoticeListHaveNoteItem {
+
     private Long noticeId;
-
     private String title;
-
+    private String note;
     private LocalDate datePost;
-
     private String writer;
-
-    private String noticeIsEnable;
-
-    private NoticeListItem(NoticeListItemBuilder builder) {
+    private NoticeListHaveNoteItem(NoticeListHaveNoteItemBuilder builder) {
         this.noticeId = builder.noticeId;
         this.title = builder.title;
+        this.note = builder.note;
         this.datePost = builder.datePost;
         this.writer = builder.writer;
-        this.noticeIsEnable = builder.noticeIsEnable;
     }
 
-    public static class NoticeListItemBuilder implements CommonModelBuilder<NoticeListItem> {
+    public static class NoticeListHaveNoteItemBuilder implements CommonModelBuilder<NoticeListHaveNoteItem> {
         private final Long noticeId;
         private final String title;
+        private final String note;
         private final LocalDate datePost;
         private final String writer;
-        private final String noticeIsEnable;
 
-        public NoticeListItemBuilder(Notice notice) {
+        public NoticeListHaveNoteItemBuilder(Notice notice) {
             this.noticeId = notice.getId();
             this.title = notice.getTitle();
+            this.note = notice.getNote();
             this.datePost = notice.getDatePost();
             this.writer = notice.getWriter();
-            this.noticeIsEnable = notice.getNoticeIsEnable() ? "공지중" : "해제중" ;
         }
 
         @Override
-        public NoticeListItem build() {
-            return new NoticeListItem(this);
+        public NoticeListHaveNoteItem build() {
+            return new NoticeListHaveNoteItem(this);
         }
     }
-
 }

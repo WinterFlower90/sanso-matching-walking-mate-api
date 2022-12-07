@@ -14,4 +14,8 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
 
     Page<Notice> findAllByNoticeIsEnableAndDatePostGreaterThanEqualAndDatePostLessThanEqualOrderByIdDesc(Boolean noticeIsEnable, LocalDate dateStart, LocalDate dateEnd, Pageable pageable);
 
+    Page<Notice> findAllByTitleContainingIgnoreCaseAndDatePostGreaterThanEqualAndDatePostLessThanEqualOrderByNoticeIsEnableDescIdDesc(String searchTitle, LocalDate dateStart, LocalDate dateEnd, Pageable pageable);
+
+    Page<Notice> findAllByTitleContainingIgnoreCaseAndNoticeIsEnableAndDatePostGreaterThanEqualAndDatePostLessThanEqualOrderByIdDesc(String searchTitle, Boolean noticeIsEnable, LocalDate dateStart, LocalDate dateEnd, Pageable pageable);
+
 }
